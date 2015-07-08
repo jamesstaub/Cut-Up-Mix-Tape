@@ -13,6 +13,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 
+var env = require('node-env-file');
+
 var MongoURI = process.env.MONGO_URI || 'mongodb://localhost/cutup';
 mongoose.connect(MongoURI, function(err, res) {
     if(err) {
@@ -85,6 +87,23 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+console.log("env ..");
+console.log(env(__dirname + '/.env'));
+// Instantiate a Genius instance:
+// var Genius = require("node-genius");
+// var geniusClient = new Genius(process.env.GENIUS_ACCESS_TOKEN);
+
+// // Call functions on that instance:
+// geniusClient.getSong("378195", function (error, song) {
+//   if (error)
+//     console.error("Whops. Something went wrong:", error);
+//   else
+//     console.log("Hoorah. Here is the song: ", song);
+// });
+
+
+
 
 
 module.exports = app;
