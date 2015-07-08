@@ -88,19 +88,27 @@ app.use(function(err, req, res, next) {
   });
 });
 
-console.log("env ..");
-console.log(env(__dirname + '/.env'));
+/** genius api **/
+var token = env(__dirname + '/.env') || process.env.GENIUS_ACCESS_TOKEN;
+var searchQuery = 'this is how we do it';
 // Instantiate a Genius instance:
-// var Genius = require("node-genius");
-// var geniusClient = new Genius(process.env.GENIUS_ACCESS_TOKEN);
+var Genius = require("node-genius");
+var geniusClient = new Genius(process.env.GENIUS_ACCESS_TOKEN);
 
-// // Call functions on that instance:
-// geniusClient.getSong("378195", function (error, song) {
-//   if (error)
-//     console.error("Whops. Something went wrong:", error);
-//   else
-//     console.log("Hoorah. Here is the song: ", song);
-// });
+// Call functions on that instance:
+
+geniusClient.search(searchQuery, function (error, results) {
+  if (error)
+    console.error("Whops. Something went wrong:", error);
+  else
+    var jsonResults = JSON.parse(results);
+    jsonResults.response.hits.forEach(function(h){
+      console.log(h.result.title + ' by ' + h.result.primary_artist.name);
+    });
+
+    // console.log("Hoorah. Here is the song: ", results);
+});
+
 
 
 

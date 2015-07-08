@@ -14,3 +14,9 @@ those segments of lyrics are injected into a UI which allows the user to sort an
 the user crafts a message with the segments of lyrics
 
 a spotify playlist is created with the songs from which lyrics were used
+
+
+
+** tools used
+
+https://github.com/alexbooker/node-genius
