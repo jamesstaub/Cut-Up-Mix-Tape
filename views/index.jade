@@ -3,3 +3,14 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  p
+
+
+  if (user)
+    p You are logged in as #{user.username}
+      a(href="/auth/logout")  logout
+  else
+    p
+      a(href="/auth/login") Please login
+      |  or
+      a(href="/auth/register")  register
