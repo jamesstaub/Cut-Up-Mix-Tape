@@ -9,9 +9,9 @@
             controller: 'MainController'
         })
 
-        // nerds page that will use the NerdController
+        //
         .when('/cutups', {
-            templateUrl: 'views/nerd.html',
+            templateUrl: 'views/cutup.html',
             controller: 'CutUpController'
         });
 

@@ -13,7 +13,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 
-var env = require('node-env-file');
+
 
 var MongoURI = process.env.MONGO_URI || 'mongodb://localhost/cutup';
 mongoose.connect(MongoURI, function(err, res) {
@@ -54,7 +54,7 @@ passport.use(Account.createStrategy());
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-app.use('/', routes);
+app.use('/api', routes);
 app.use('/users', users);
 app.use('/auth/', auth);
 // catch 404 and forward to error handler
@@ -87,30 +87,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-/** genius api **/
-var token = env(__dirname + '/.env') || process.env.GENIUS_ACCESS_TOKEN;
-var searchQuery = 'this is how we do it';
-// Instantiate a Genius instance:
-var Genius = require("node-genius");
-var geniusClient = new Genius(process.env.GENIUS_ACCESS_TOKEN);
-
-// Call functions on that instance:
-
-geniusClient.search(searchQuery, function (error, results) {
-  if (error)
-    console.error("Whops. Something went wrong:", error);
-  else
-    var jsonResults = JSON.parse(results);
-    jsonResults.response.hits.forEach(function(h){
-      console.log(h.result.title + ' by ' + h.result.primary_artist.name);
-    });
-
-    // console.log("Hoorah. Here is the song: ", results);
-});
-
-
-
 
 
 
