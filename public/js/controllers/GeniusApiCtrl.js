@@ -9,8 +9,6 @@ angular.module('cutupApp').controller('GeniusApiController', function($scope, Ge
     });
   }
 
-  // $scopequeryGenius();
-
   // after each change to $scope.queryStr invoke queryGenius
   // attach input field to ng-model of rqueryStr
 

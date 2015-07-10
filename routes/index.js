@@ -17,7 +17,7 @@ var geniusClient = new Genius(process.env.GENIUS_ACCESS_TOKEN);
 var searchGeniusPromise = function(searchQuery, transformer) {
   return new Promise(function(resolve, reject) {
     // hacked the node-genius npm module to allow per_page length as optional second argument of .search method. evenutally could clean up and make less hacky.
-    geniusClient.search(searchQuery, 5, function(error, results) {
+    geniusClient.search(searchQuery, 8, function(error, results) {
       if (error) {
         reject(error);
         // console.error("Whops. Something went wrong:", error);
@@ -87,7 +87,7 @@ router.get('/list/:query', function(req, res) {
 });
 
 /* GET home page. */
-router.get('/segmets/:query', function(req, res) {
+router.get('/segments/:query', function(req, res) {
   searchGenius(req.params.query, referantsByID).then(function(lyricsArray){
     return Promise.all(lyricsArray)
   }).then(function(songsResponse){

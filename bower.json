@@ -1,9 +1,11 @@
 {
-    "name": "starter-node-angular",
-    "version": "1.0.0",
-    "dependencies": {
-        "angular": "latest",
-        "angular-route": "latest",
-        "materialize": "latest"
-    }
+  "name": "starter-node-angular",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "latest",
+    "angular-route": "latest",
+    "materialize": "latest",
+    "ngDraggable": "~0.1.8",
+    "dndLists": "~1.2.0"
+  }
 }
