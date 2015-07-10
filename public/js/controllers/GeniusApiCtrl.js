@@ -1,19 +1,18 @@
 angular.module('cutupApp').controller('GeniusApiController', function($scope, GeniusApi) {
 
-  function queryGeniusApi(){
-    var apiPromise = GeniusApi.get($scope.queryStr)
-    console.log("Promise : " + apiPromise);
-    apiPromise.success(function(response){
-      console.log(response);
+  console.log("calls geniusapi the controller")
+
+  $scope.queryGenius = function(query){
+    console.log("calls the query");
+    GeniusApi.get(query).success(function(response){
       $scope.apiResults = response;
     });
   }
-  queryGeniusApi();
 
-  // after each change to $scope.queryStr invoke getResults
+  // $scopequeryGenius();
+
+  // after each change to $scope.queryStr invoke queryGenius
   // attach input field to ng-model of rqueryStr
-
-
 
 });
 
