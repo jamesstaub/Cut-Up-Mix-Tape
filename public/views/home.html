@@ -1,7 +1,11 @@
 <div>
     <h1>songs</h1>
+    <query></query>
     <ul>
-      <li ng-repeat="result in results">{{ result.title }}</li>
+      <li ng-repeat="songResult in apiResults">
+        <ul>
+          <li ng-repeat="line in songResult">{{line}}</li>
+        </ul>
+      </li>
     </ul>
-
 </div>
