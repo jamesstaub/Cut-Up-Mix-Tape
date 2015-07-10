@@ -35,7 +35,7 @@ angular.module("cutupApp").controller("DragDropController", function($scope) {
         }
     ];
 
-    console.log($scope.lists);
+
 
     // Model to JSON for demo purpose
     $scope.$watch('lists', function(lists) {

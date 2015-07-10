@@ -49,18 +49,29 @@ function listResults(results){
 
 // list songs Ids of search results, these get fed into a referants request
 function referantsByID(results) {
+  var songData = {};
   var referentPromises = [];
+
+  // iterate over each result from the search query
   results.response.hits.forEach(function(h) {
-    var id = h.result.id;
-    referentPromises.push(new Promise(function(resolve, reject) {
+    songData = {
+      id : h.result.id,
+      title : h.result.title,
+      artist : h.result.primary_artist.name,
+      artist_img : h.result.primary_artist.image_url
+    };
+
+    songData.referentPromises = new Promise(function(resolve, reject) {
       // also hacked the node-genius module to include getReferents method
-      geniusClient.getReferents(id, function(error, segment) {
+      geniusClient.getReferents(songData.id, function(error, segment) {
         if (error) {
+          console.log('failed to get referent');
           reject(error);
-          // console.error("Whops. Something went wrong:", error);
+
         } else {
+          //
           var jsonResults = JSON.parse(segment);
-          var lyricsArray = []
+          var lyricsArray = [];
           jsonResults.response.referents.forEach(function(r){
             lyricsArray.push(r.fragment);
           })
@@ -68,10 +79,11 @@ function referantsByID(results) {
           resolve(lyricsArray);
         }
       }) //end geniusClient.getReferants
-    }))
-      // call it with Promise.all(referantsByID() )
+
+    });
+    console.log(songData)
   })
-  return referentPromises
+  return songData;
 }
 
 function searchGenius(searchQuery, transformer){
@@ -80,14 +92,15 @@ function searchGenius(searchQuery, transformer){
 }
 
 /* GET home page. */
-router.get('/list/:query', function(req, res) {
+router.get('/listsongs  /:query', function(req, res) {
   searchGenius(req.params.query, listResults).then(function(songsArray){
     res.json(songsArray);
   })
 });
 
 /* GET home page. */
-router.get('/segments/:query', function(req, res) {
+router.get('/stanzas/:query', function(req, res) {
+  console.log(res);
   searchGenius(req.params.query, referantsByID).then(function(lyricsArray){
     return Promise.all(lyricsArray)
   }).then(function(songsResponse){

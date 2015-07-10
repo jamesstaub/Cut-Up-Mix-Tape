@@ -1,3 +1,6 @@
+<div id="cutup-composer">
+
+</div>
 
 <div ng-controller="DragDropController">
   <div ng-repeat="list in lists">
@@ -26,7 +29,7 @@
     <ul>
       <li ng-repeat="songResult in apiResults">
         <ul>
-          <li ng-repeat="line in songResult">{{line}}</li>
+          <li ng-repeat="stanza in songResult">{{stanza}}</li>
         </ul>
       </li>
     </ul>
