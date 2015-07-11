@@ -47,45 +47,6 @@ function listResults(results){
   return geniusResults
 }
 
-// list songs Ids of search results, these get fed into a referants request
-// function referantsByID(results) {
-//   var referentPromises = [];
-
-//   // iterate over each result from the search query
-//   results.response.hits.forEach(function(h) {
-//     var songData = {
-//       id : h.result.id,
-//       title : h.result.title,
-//       artist : h.result.primary_artist.name,
-//       artist_img : h.result.primary_artist.image_url
-//     };
-
-//     songData.lyrics = new Promise(function(resolve, reject) {
-//       // also hacked the node-genius module to include getReferents method
-//       geniusClient.getReferents(songData.id, function(error, segment) {
-//         if (error) {
-//           console.log('failed to get referent');
-//           reject(error);
-
-//         } else {
-//           //
-//           var jsonResults = JSON.parse(segment);
-//           var lyricsArray = [];
-//           jsonResults.response.referents.forEach(function(r){
-//             lyricsArray.push(r.fragment);
-//           })
-//           // lyrics array is the final, clean array of lyric segments
-//           resolve(lyricsArray);
-
-//         }
-//       }) //end geniusClient.getReferants request
-
-//     });
-//     referentPromises.push(songData);
-
-//   })
-//   return referentPromises;
-// }
 
 function referantsByID(results) {
   var referentPromises = [];
@@ -108,7 +69,7 @@ function referantsByID(results) {
           jsonResults.response.referents.forEach(function(r){
             lyricsArray.push(r.fragment);
           })
-          // lyrics array is the final, clean array of lyric segments
+          // lyrics array is the final, clean array of lyric segments, resolve promise with the lyrics and song meta
           resolve(
             {
               id : h.result.id,
@@ -118,7 +79,6 @@ function referantsByID(results) {
               lyrics : lyricsArray
             }
           );
-
         }
       }) //end geniusClient.getReferants request
     });
@@ -129,8 +89,6 @@ function referantsByID(results) {
   })
   return referentPromises;
 }
-
-
 
 
 function searchGenius(searchQuery, transformer){

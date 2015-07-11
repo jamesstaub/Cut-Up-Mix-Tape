@@ -1,8 +1,5 @@
-<div id="cutup-composer">
 
-</div>
-
-<div ng-controller="DragDropController">
+<!-- <div ng-controller="DragDropController">
   <div ng-repeat="list in lists">
     <ul dnd-list="list.people"
     dnd-allowed-types="list.allowedTypes"
@@ -20,20 +17,45 @@
       </li>
     </ul>
   </div>
+</div> -->
+
+
+<query></query>
+
+<div ng-repeat="list in lists">
+  <h2>{{list.description}}</h2>
+
+  <ul ng-repeat="song in list.songs track by $index"
+  dnd-list="list.songs"
+  dnd-dragover="canDropHere(type, list.type)"
+  >
+    <li>{{list.label}}</li>
+    <li ng-repeat="stanza in song.lyrics"
+    dnd-draggable="stanza"
+    dnd-type="list.type"
+    dnd-moved="addToComposition($index, list.label)"
+    dnd-effect-allowed="copyMove"
+    data-song-id="song.id"
+    data-song-title="{{song.title}}"
+    data-song-artist="{{song.artist}}"
+    >{{stanza}}</li>
+  </ul>
+
+
 </div>
 
-<hr>
 
-    <h1>query some lyrics</h1>
-    <query></query>
-    <ul>
-      <li ng-repeat="songResult in apiResults">
+
+
+<!--     <ul>
+      <li ng-repeat="song in apiResults">
+        <strong>{{song.title}}</strong> by <strong>{{song.artist}}</strong>
         <ul>
-          <li ng-repeat="stanza in songResult">{{stanza}}</li>
+          <li ng-repeat="stanza in song.lyrics">{{stanza}}</li>
         </ul>
       </li>
     </ul>
 
-
+ -->
 
 
