@@ -48,22 +48,55 @@ function listResults(results){
 }
 
 // list songs Ids of search results, these get fed into a referants request
+// function referantsByID(results) {
+//   var referentPromises = [];
+
+//   // iterate over each result from the search query
+//   results.response.hits.forEach(function(h) {
+//     var songData = {
+//       id : h.result.id,
+//       title : h.result.title,
+//       artist : h.result.primary_artist.name,
+//       artist_img : h.result.primary_artist.image_url
+//     };
+
+//     songData.lyrics = new Promise(function(resolve, reject) {
+//       // also hacked the node-genius module to include getReferents method
+//       geniusClient.getReferents(songData.id, function(error, segment) {
+//         if (error) {
+//           console.log('failed to get referent');
+//           reject(error);
+
+//         } else {
+//           //
+//           var jsonResults = JSON.parse(segment);
+//           var lyricsArray = [];
+//           jsonResults.response.referents.forEach(function(r){
+//             lyricsArray.push(r.fragment);
+//           })
+//           // lyrics array is the final, clean array of lyric segments
+//           resolve(lyricsArray);
+
+//         }
+//       }) //end geniusClient.getReferants request
+
+//     });
+//     referentPromises.push(songData);
+
+//   })
+//   return referentPromises;
+// }
+
 function referantsByID(results) {
   var referentPromises = [];
 
-
   // iterate over each result from the search query
   results.response.hits.forEach(function(h) {
-    var songData = {
-      id : h.result.id,
-      title : h.result.title,
-      artist : h.result.primary_artist.name,
-      artist_img : h.result.primary_artist.image_url
-    };
 
-    songData.lyrics = new Promise(function(resolve, reject) {
+    var id = h.result.id;
+    var songData = new Promise(function(resolve, reject) {
       // also hacked the node-genius module to include getReferents method
-      geniusClient.getReferents(songData.id, function(error, segment) {
+      geniusClient.getReferents(id, function(error, segment) {
         if (error) {
           console.log('failed to get referent');
           reject(error);
@@ -71,21 +104,34 @@ function referantsByID(results) {
         } else {
           //
           var jsonResults = JSON.parse(segment);
-          console.log(segment);
           var lyricsArray = [];
           jsonResults.response.referents.forEach(function(r){
             lyricsArray.push(r.fragment);
           })
           // lyrics array is the final, clean array of lyric segments
-          resolve(lyricsArray);
+          resolve(
+            {
+              id : h.result.id,
+              title : h.result.title,
+              artist : h.result.primary_artist.name,
+              artist_img : h.result.primary_artist.image_url,
+              lyrics : lyricsArray
+            }
+          );
+
         }
       }) //end geniusClient.getReferants request
-
     });
+
+    // console.log(songData)
     referentPromises.push(songData);
+
   })
   return referentPromises;
 }
+
+
+
 
 function searchGenius(searchQuery, transformer){
   // invoking the above promise with a transformer function as the second argument.
@@ -106,6 +152,7 @@ router.get('/stanzas/:query', function(req, res) {
   searchGenius(req.params.query, referantsByID).then(function(promiseResults){
     return Promise.all(promiseResults)
   }).then(function(songsResultsArray){
+    console.log(songsResultsArray);
       res.json(songsResultsArray);
     }).catch(function(err){
       console.error(err);
