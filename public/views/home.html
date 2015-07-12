@@ -1,61 +1,34 @@
 
-<!-- <div ng-controller="DragDropController">
-  <div ng-repeat="list in lists">
-    <ul dnd-list="list.people"
-    dnd-allowed-types="list.allowedTypes"
-    dnd-disable-if="list.people.length >= list.max">
-
-        <li ng-repeat="person in list.people"
-        dnd-draggable="person"
-        dnd-type="person.type"
-        dnd-disable-if="person.type == 'unknown'"
-        dnd-moved="list.people.splice($index, 1)"
-        dnd-effect-allowed="move"
-        class="background-{{person.type}}"
-        >
-        {{person.name}}
-      </li>
-    </ul>
-  </div>
-</div> -->
 
 
 <query></query>
 
-<div ng-repeat="list in lists">
-  <h2>{{list.description}}</h2>
+<div ng-repeat="container in model track by $index">
+  <hr>
+  <ul ng-repeat="songs in container.songs"
+      dnd-list="songs">
 
-  <ul ng-repeat="song in list.songs track by $index"
-  dnd-list="list.songs"
-  dnd-dragover="canDropHere(type, list.type)"
-  >
-    <li>{{list.label}}</li>
-    <li ng-repeat="stanza in song.lyrics"
-    dnd-draggable="stanza"
-    dnd-type="list.type"
-    dnd-moved="addToComposition($index, list.label)"
-    dnd-effect-allowed="copyMove"
-    data-song-id="song.id"
-    data-song-title="{{song.title}}"
-    data-song-artist="{{song.artist}}"
-    >{{stanza}}</li>
+      <li ng-repeat="lyricObject in songs track by $index"
+      dnd-draggable="lyricObject"
+      dnd-moved="songs.splice($index, 1)">
+        {{lyricObject.lyric}}
+      </li>
   </ul>
-
-
 </div>
 
 
 
+<!--
+<ul dnd-list="list">
 
-<!--     <ul>
-      <li ng-repeat="song in apiResults">
-        <strong>{{song.title}}</strong> by <strong>{{song.artist}}</strong>
-        <ul>
-          <li ng-repeat="stanza in song.lyrics">{{stanza}}</li>
-        </ul>
-      </li>
-    </ul>
-
+    <li ng-repeat="item in list"
+        dnd-draggable="item"
+        dnd-moved="list.splice($index, 1)"
+        dnd-effect-allowed="move"
+        dnd-selected="models.selected = item"
+        ng-class="{'selected': models.selected === item}"
+        >
+        {{item.label}}
+    </li>
+</ul>
  -->
-
-

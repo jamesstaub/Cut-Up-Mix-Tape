@@ -17,7 +17,7 @@ var geniusClient = new Genius(process.env.GENIUS_ACCESS_TOKEN);
 var searchGeniusPromise = function(searchQuery, transformer) {
   return new Promise(function(resolve, reject) {
     // hacked the node-genius npm module to allow per_page length as optional second argument of .search method. evenutally could clean up and make less hacky.
-    geniusClient.search(searchQuery, 8, function(error, results) {
+    geniusClient.search(searchQuery, 2, function(error, results) {
       if (error) {
         reject(error);
         // console.error("Whops. Something went wrong:", error);
@@ -69,10 +69,10 @@ function referantsByID(results) {
           // each object in the array of lyric segments needs to containthe song info to keep it associated in the front end cutup
           jsonResults.response.referents.forEach(function(r){
             lyricsArray.push({
-              lyrics : r.fragment,
               title : h.result.title,
               artist : h.result.primary_artist.name,
-              artist_img : h.result.primary_artist.image_url
+              artist_img : h.result.primary_artist.image_url,
+              lyric : r.fragment
             });
           })
           // lyrics array is the final, clean array of lyric segments, resolve promise with the lyrics and song meta

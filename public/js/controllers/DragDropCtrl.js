@@ -1,39 +1,151 @@
 angular.module("cutupApp").controller("DragDropController", function($scope) {
 
     $scope.lists = [
-        {
-            label: "Men",
-            allowedTypes: ['man'],
-            max: 4,
-            people: [
-                {name: "Bob", type: "man"},
-                {name: "Charlie", type: "man"},
-                {name: "Dave", type: "man"}
-            ]
-        },
-        {
-            label: "Women",
-            allowedTypes: ['woman'],
-            max: 4,
-            people: [
-                {name: "Alice", type: "woman"},
-                {name: "Eve", type: "woman"},
-                {name: "Peggy", type: "woman"}
-            ]
-        },
-        {
-            label: "People",
-            allowedTypes: ['man', 'woman'],
-            max: 6,
-            people: [
-                {name: "Frank", type: "man"},
-                {name: "Mallory", type: "woman"},
-                {name: "Alex", type: "unknown"},
-                {name: "Oscar", type: "man"},
-                {name: "Wendy", type: "woman"}
-            ]
-        }
-    ];
+  [
+    [
+      {
+        "label": "Item 10"
+      },
+      {
+        "label": "Item 11"
+      },
+      {
+        "label": "Item 12"
+      },
+      {
+        "label": "Item 13"
+      },
+      {
+        "label": "Item 14"
+      },
+      {
+        "label": "Item 15"
+      },
+      {
+        "label": "Item 16"
+      }
+    ],
+    [
+      {
+        "label": "Item 17"
+      },
+      {
+        "label": "Item 18"
+      },
+      {
+        "label": "Item 19"
+      },
+      {
+        "label": "Item 20"
+      },
+      {
+        "label": "Item 21"
+      },
+      {
+        "label": "Item 22"
+      },
+      {
+        "label": "Item 23"
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "label": "Item 24"
+      },
+      {
+        "label": "Item 25"
+      },
+      {
+        "label": "Item 26"
+      },
+      {
+        "label": "Item 27"
+      },
+      {
+        "label": "Item 28"
+      },
+      {
+        "label": "Item 29"
+      },
+      {
+        "label": "Item 30"
+      }
+    ],
+    [
+      {
+        "label": "Item 31"
+      },
+      {
+        "label": "Item 32"
+      },
+      {
+        "label": "Item 33"
+      },
+      {
+        "label": "Item 34"
+      },
+      {
+        "label": "Item 35"
+      },
+      {
+        "label": "Item 36"
+      },
+      {
+        "label": "Item 37"
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "label": "Item 38"
+      },
+      {
+        "label": "Item 39"
+      },
+      {
+        "label": "Item 40"
+      },
+      {
+        "label": "Item 41"
+      },
+      {
+        "label": "Item 42"
+      },
+      {
+        "label": "Item 43"
+      },
+      {
+        "label": "Item 44"
+      }
+    ],
+    [
+      {
+        "label": "Item 45"
+      },
+      {
+        "label": "Item 46"
+      },
+      {
+        "label": "Item 47"
+      },
+      {
+        "label": "Item 48"
+      },
+      {
+        "label": "Item 49"
+      },
+      {
+        "label": "Item 50"
+      },
+      {
+        "label": "Item 51"
+      }
+    ]
+  ]
+];
 
 
 

@@ -5,43 +5,50 @@ angular.module('cutupApp').controller('GeniusApiController', function($scope, Ge
   $scope.queryGenius = function(query){
     console.log("calls the query");
     GeniusApi.get(query).success(function(response) {
-      // lists for the api lyrics and the
-      $scope.lists = [
-      {
-        description: "Drag lyrics here",
-        label: "CutUp",
-        type: "CutUpSegment",
-        allowedTypes: ['songResult'],
-        songs: ['']
-      },
-      {
-        description: "type some thoughts",
-        type: 'songResult',
-        label: "songResult",
-        songs: response
-      }]
+      // model for the api lyrics and the
+      $scope.model = [
+        {
+          title: 'search results',
+          songs: response,
+          type: 'results'
+        },
+        {
+          title: 'your cutup title',
+          songs: [[
+            {
+              artist: 'Mac Miller',
+              artist_img: 'http://images.rapgenius.com/1d1887f20ed9a44c0f0842f4e0d508a7.300x300x1.jpg',
+              lyric: 'Oh well, it\'ll be OK...'
+            },
+            {
+              title: 'OK',
+              artist: 'Mac Miller',
+              artist_img: 'http://images.rapgenius.com/1d1887f20ed9a44c0f0842f4e0d508a7.300x300x1.jpg',
+              lyric: 'How many hoes want to clean Mac\'s beard?'
+            }
+          ]],
+          type: 'cutup'
+        }
 
+      ];
     });
   }
 
-
-  $scope.addToComposition = function(stanzaIndex, list){
-    // first test to move the stanza from one model to the other
-
-    // then add argument to allow stanzas within the cutup to be moved around
-        // ie reinvoke list.songs.splice($index,1) only if its the cutup list
-
-    console.log(stanzaIndex + ' ' + list);
+  $scope.moveStanza = function(stanzaIndex, item){
+    // move the stanza from one model to the other
+    console.log(stanzaIndex + ' ' + item);
 
   }
 
 
   $scope.canDropHere = function(selectedType, destinationType ){
-    console.log("selectedType: " +selectedType);
-    console.log("destinationType: " +destinationType);
+    return true;
+    // return selectedType !== destinationType;
 
-    return selectedType !== destinationType;
+  }
 
+  $scope.dropItem = function(item){
+    return item;
   }
 
   //   // Model to JSON for demo purpose
