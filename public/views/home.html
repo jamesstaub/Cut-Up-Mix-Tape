@@ -1,20 +1,24 @@
 
-
-
 <query></query>
+<span class="selected-info">{{model.selected.title}}</span> <span ng-if="model.selected">by</span> <span class="selected-info">{{model.selected.artist}} </span>
 
-<div ng-repeat="container in model track by $index">
-  <hr>
-  <ul ng-repeat="songs in container.songs"
-      dnd-list="songs">
-
-      <li ng-repeat="lyricObject in songs track by $index"
-      dnd-draggable="lyricObject"
-      dnd-moved="songs.splice($index, 1)">
-        {{lyricObject.lyric}}
-      </li>
-  </ul>
+<div class="row">
+  <div class ="col m6"ng-repeat="container in model.containers track by $index">
+      <hr>
+      <ul ng-repeat="songs in container.songs"
+          dnd-list="songs">
+          <li ng-repeat="lyricObject in songs track by $index"
+          dnd-draggable="lyricObject"
+          dnd-effect-allowed="move"
+          dnd-moved="songs.splice($index, 1)"
+          dnd-selected="model.selected = lyricObject"
+          ng-class="{'selected': model.selected === lyricObject}">
+            {{lyricObject.lyric}}
+          </li>
+      </ul>
+    </div>
 </div>
+
 
 
 

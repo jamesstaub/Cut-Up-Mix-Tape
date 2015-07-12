@@ -6,31 +6,31 @@ angular.module('cutupApp').controller('GeniusApiController', function($scope, Ge
     console.log("calls the query");
     GeniusApi.get(query).success(function(response) {
       // model for the api lyrics and the
-      $scope.model = [
-        {
-          title: 'search results',
-          songs: response,
-          type: 'results'
-        },
-        {
-          title: 'your cutup title',
-          songs: [[
-            {
-              artist: 'Mac Miller',
-              artist_img: 'http://images.rapgenius.com/1d1887f20ed9a44c0f0842f4e0d508a7.300x300x1.jpg',
-              lyric: 'Oh well, it\'ll be OK...'
-            },
-            {
-              title: 'OK',
-              artist: 'Mac Miller',
-              artist_img: 'http://images.rapgenius.com/1d1887f20ed9a44c0f0842f4e0d508a7.300x300x1.jpg',
-              lyric: 'How many hoes want to clean Mac\'s beard?'
-            }
-          ]],
-          type: 'cutup'
-        }
-
-      ];
+      $scope.model = {
+        containers: [
+          {
+            type: 'results',
+            title: 'search results',
+            songs: response
+          },
+          {
+            type: 'cutup',
+            title: 'your cutup title',
+            songs: [[
+              {
+                artist: 'Mac Miller',
+                lyric: 'Oh well, it\'ll be OK...'
+              },
+              {
+                title: 'OK',
+                artist: 'Mac Miller',
+                lyric: 'How many hoes want to clean Mac\'s beard?'
+              }
+            ]]
+          }
+        ],
+        selected: null
+      }
     });
   }
 
