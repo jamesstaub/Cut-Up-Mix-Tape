@@ -66,19 +66,17 @@ function referantsByID(results) {
           //
           var jsonResults = JSON.parse(segment);
           var lyricsArray = [];
+          // each object in the array of lyric segments needs to containthe song info to keep it associated in the front end cutup
           jsonResults.response.referents.forEach(function(r){
-            lyricsArray.push(r.fragment);
-          })
-          // lyrics array is the final, clean array of lyric segments, resolve promise with the lyrics and song meta
-          resolve(
-            {
-              id : h.result.id,
+            lyricsArray.push({
+              lyrics : r.fragment,
               title : h.result.title,
               artist : h.result.primary_artist.name,
-              artist_img : h.result.primary_artist.image_url,
-              lyrics : lyricsArray
-            }
-          );
+              artist_img : h.result.primary_artist.image_url
+            });
+          })
+          // lyrics array is the final, clean array of lyric segments, resolve promise with the lyrics and song meta
+          resolve(lyricsArray);
         }
       }) //end geniusClient.getReferants request
     });
