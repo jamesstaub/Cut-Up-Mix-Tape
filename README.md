@@ -17,7 +17,9 @@ a spotify playlist is created with the songs from which lyrics were used
 
 
 #project spec
-## tiered development priorities for Cut Up
+## tiered development schedule
+iterative development prioritizes the bare minimum functionality, and incrementally improves features.
+
 
 ###node/express server
 1. construct a simple node/express server and implement local authentication strategy.
@@ -58,4 +60,5 @@ a spotify playlist is created with the songs from which lyrics were used
 
 ## tools used
 https://github.com/alexbooker/node-genius
+
 https://github.com/marceljuenemann/angular-drag-and-drop-lists
