@@ -3,7 +3,7 @@
 <span class="selected-info">{{model.selected.title}}</span> <span ng-if="model.selected">by</span> <span class="selected-info">{{model.selected.artist}} </span>
 
 <div class="row">
-  <div class ="col m6"ng-repeat="container in model.containers track by $index">
+  <div class ="col m6  cutup-list"ng-repeat="container in model.containers track by $index">
       <hr>
       <ul ng-repeat="songs in container.songs"
           dnd-list="songs">

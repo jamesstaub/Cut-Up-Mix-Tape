@@ -1,9 +1,3 @@
-body
-  padding: 50px
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
-a
-  color: #00B7FF
-
 
 .cutup-list ul[dnd-list],
 .cutup-list ul[dnd-list] > li {
@@ -25,7 +19,6 @@ a
     background-color: #ddd;
     min-height: 42px;
 }
-
 
 .cutup-list ul[dnd-list] li {
     background-color: #fff;
