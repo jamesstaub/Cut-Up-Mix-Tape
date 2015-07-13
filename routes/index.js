@@ -11,10 +11,12 @@ var token = process.env.GENIUS_ACCESS_TOKEN ||  env(path.join(__dirname, '../.en
 var Genius = require("node-genius");
 var geniusClient = new Genius(process.env.GENIUS_ACCESS_TOKEN);
 
+
+// makes a search request to Genius API
 var searchGeniusPromise = function(searchQuery, transformer) {
   return new Promise(function(resolve, reject) {
     // hacked the node-genius npm module to allow per_page length as optional second argument of .search method. evenutally could clean up and make less hacky.
-    geniusClient.search(searchQuery, 2, function(error, results) {
+    geniusClient.search(searchQuery, 10, function(error, results) {
       if (error) {
         reject(error);
         // console.error("Whops. Something went wrong:", error);
@@ -32,17 +34,17 @@ var searchGeniusPromise = function(searchQuery, transformer) {
 // transformer functions to filter the results of the genius search request
 
 // list title and artist of the search results
-function listResults(results){
-  var geniusResults = [];
-  results.response.hits.forEach(function(h) {
-    var song = {
-      title: h.result.title,
-      artist: h.result.primary_artist.name
-    }
-    geniusResults.push(song);
-  });
-  return geniusResults
-}
+// function listResults(results){
+//   var geniusResults = [];
+//   results.response.hits.forEach(function(h) {
+//     var song = {
+//       title: h.result.title,
+//       artist: h.result.primary_artist.name
+//     }
+//     geniusResults.push(song);
+//   });
+//   return geniusResults
+// }
 
 
 function referantsByID(results) {
@@ -65,15 +67,17 @@ function referantsByID(results) {
           var lyricsArray = [];
           // each object in the array of lyric segments needs to containthe song info to keep it associated in the front end cutup
           jsonResults.response.referents.forEach(function(r){
-            lyricsArray.push({
+            lyricsArray.push(r.fragment);
+          })
+          // lyrics array is the final, clean array of lyric segments, resolve promise with the lyrics and song meta
+          resolve(
+            {
+              id: h.result.id,
               title : h.result.title,
               artist : h.result.primary_artist.name,
               artist_img : h.result.primary_artist.image_url,
-              lyric : r.fragment
-            });
-          })
-          // lyrics array is the final, clean array of lyric segments, resolve promise with the lyrics and song meta
-          resolve(lyricsArray);
+              lyrics : lyricsArray
+          });
         }
       }) //end geniusClient.getReferants request
     });
@@ -91,12 +95,30 @@ function searchGenius(searchQuery, transformer){
   return searchGeniusPromise(searchQuery, transformer);
 }
 
-/* GET home page. */
-router.get('/listsongs  /:query', function(req, res) {
-  searchGenius(req.params.query, listResults).then(function(songsArray){
-    res.json(songsArray);
+// apply fuzzy filtering to the lyrics array search results
+function filterLyrics(searchQuery, songsArray){
+  return songsArray.map(function(song){
+    var filteredSong = {
+          title: song.title,
+          artist: song.artist,
+          id: song.id,
+          lyrics: fuzzy(searchQuery, song.lyrics)
+        }
+    if(filteredSong.lyrics.length){
+      return filteredSong;
+    }
+
   })
-});
+}
+
+
+
+/* GET home page. */
+// router.get('/listsongs/:query', function(req, res) {
+//   searchGenius(req.params.query, listResults).then(function(songsArray){
+//     res.json(songsArray);
+//   })
+// });
 
 /* GET home page. */
 router.get('/stanzas/:query', function(req, res) {
@@ -105,7 +127,8 @@ router.get('/stanzas/:query', function(req, res) {
   searchGenius(req.params.query, referantsByID).then(function(promiseResults){
     return Promise.all(promiseResults)
   }).then(function(songsResultsArray){
-    console.log(songsResultsArray);
+
+    console.log(filterLyrics(req.params.query, songsResultsArray));
       res.json(songsResultsArray);
     }).catch(function(err){
       console.error(err);
