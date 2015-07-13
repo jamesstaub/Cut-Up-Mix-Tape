@@ -107,11 +107,25 @@ function filterLyrics(searchQuery, songsArray){
     if(filteredSong.lyrics.length){
       return filteredSong;
     }
-
   })
 }
 
-
+// reformats song results into an array that can be consumed by the front end drang and drop
+function packageLyricSegments(songsArray){
+  var lyricsArray = []
+  songsArray.forEach(function(song){
+    var lyricObj = {}
+    song.lyrics.forEach(function(lyric){
+      lyricsArray.push({
+          lyric:lyric,
+          title: song.title,
+          artist: song.artist,
+          id: song.id
+        })
+    })
+  })
+  return lyricsArray;
+}
 
 /* GET home page. */
 // router.get('/listsongs/:query', function(req, res) {
@@ -128,8 +142,8 @@ router.get('/stanzas/:query', function(req, res) {
     return Promise.all(promiseResults)
   }).then(function(songsResultsArray){
 
-    console.log(filterLyrics(req.params.query, songsResultsArray));
-      res.json(songsResultsArray);
+    console.log(packageLyricSegments(filterLyrics(req.params.query, songsResultsArray)));
+      res.json(packageLyricSegments(filterLyrics(req.params.query, songsResultsArray)));
     }).catch(function(err){
       console.error(err);
       res.json(err);
