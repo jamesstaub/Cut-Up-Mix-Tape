@@ -141,8 +141,7 @@ router.get('/stanzas/:query', function(req, res) {
   searchGenius(req.params.query, referantsByID).then(function(promiseResults){
     return Promise.all(promiseResults)
   }).then(function(songsResultsArray){
-
-    console.log(packageLyricSegments(filterLyrics(req.params.query, songsResultsArray)));
+    // console.log(packageLyricSegments(filterLyrics(req.params.query, songsResultsArray)));
       res.json(packageLyricSegments(filterLyrics(req.params.query, songsResultsArray)));
     }).catch(function(err){
       console.error(err);
