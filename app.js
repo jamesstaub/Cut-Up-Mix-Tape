@@ -10,12 +10,13 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var routes = require('./routes/index');
+var cutups = require('./routes/cutup');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 
 
 
-var MongoURI = process.env.MONGO_URI || 'mongodb://localhost/cutup';
+var MongoURI = process.env.MONGO_URI || 'mongodb://localhost/cutup-mixtape';
 mongoose.connect(MongoURI, function(err, res) {
     if(err) {
         console.log('ERROR connecting to: ' + MongoURI + '. ' + err);
@@ -55,6 +56,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 app.use('/api', routes);
+app.use('/cutups', cutups);
 app.use('/users', users);
 app.use('/auth/', auth);
 // catch 404 and forward to error handler
@@ -64,7 +66,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
 
 // development error handler
 // will print stacktrace

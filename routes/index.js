@@ -6,7 +6,7 @@ var fuzzy = require('fuzzy-filter')
 
 /********** genius api *********/
 var token = process.env.GENIUS_ACCESS_TOKEN ||  env(path.join(__dirname, '../.env'));
-// var searchQuery = 'i got something to say i killed your baby today  ';1
+
 // Instantiate a Genius instance:
 var Genius = require("node-genius");
 var geniusClient = new Genius(process.env.GENIUS_ACCESS_TOKEN);

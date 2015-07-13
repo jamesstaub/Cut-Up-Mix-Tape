@@ -1,18 +1,16 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var contentSchema = new Schema({
-  title: {type: String, required: true},
+var lyricObjectSchema = new Schema({
   artist_name: {type: String, required: true},
-  song_name: {type: String, required: true},
+  song_title: {type: String, required: true},
   genius_song_id: {type: Number, required: true}
 });
-
 
 var cutupSchema = new Schema({
   title: {type: String, required: true},
   created: { type: Date, default: Date.now },
-  content: [contentSchema],
+  content: [lyricObjectSchema],
   // make virtual attributes for
     // stringified message
     // list of artists used
@@ -22,5 +20,4 @@ var cutupSchema = new Schema({
 });
 
 
-
-module.exports = mongoose.model('CutUp', CutUp);
+module.exports = mongoose.model('Cutup', cutupSchema);
