@@ -31,17 +31,30 @@ a spotify playlist is created with the songs from which lyrics were used
 3. implement a drag and drop directive to manipulate the search results and add them to the CutUp model.
 
 
-## smarter querying/filtering of lyric segments
+### filter api results
+1. implement a fuzzy search/filtering of the search results to find the best matching lyric segment for each search request.
+2. filter out results taht return empty from fuzzy search.
+
+
+### saving a cutup
+1. save the cutup composition to the database
+2. associate the cutup with a logged in user
+
+
+### render final cutup
+1. upon saving a cutup, redirect user to the page for that single cutup
+2. build single cutup page template, include interface for displaying song details
+
+
+### user logged in page
+1. build a page template for logged in users to view, edit or delete their cutups
+
+### smarter querying of lyric segments
 1. chunk up the user's input text into numerous requests, instead of a single one, thus allowing more relevant search results
-2. implement a fuzzy search/filtering of the search results to find the best matching lyric segment for each search chunk.
-3. include a reference to the chunked search query with the corresponding response, to associate them in the front end.
+2. develop the <query> angular directive to visualize how the input string is getting chunked up
+2. include a reference to the chunked search query with the corresponding response, to associate them in the front end.
 
 
-## dragable interface
-when search results appear, the user must be able to select segments of search results, and drag them into their message composition
-
-## song playlist
-once song segments are added
 
 ## tools used
 https://github.com/alexbooker/node-genius
