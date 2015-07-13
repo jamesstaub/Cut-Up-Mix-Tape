@@ -11,12 +11,12 @@ angular.module('cutupApp').controller('GeniusApiController', function($scope, Ge
           {
             type: 'results',
             title: 'search results',
-            songs: response
+            lyrics: response
           },
           {
             type: 'cutup',
             title: 'your cutup title',
-            songs: [[
+            lyrics: [
               {
                 artist: 'Mac Miller',
                 lyric: 'Oh well, it\'ll be OK...'
@@ -26,7 +26,7 @@ angular.module('cutupApp').controller('GeniusApiController', function($scope, Ge
                 artist: 'Mac Miller',
                 lyric: 'How many hoes want to clean Mac\'s beard?'
               }
-            ]]
+            ]
           }
         ],
         selected: null

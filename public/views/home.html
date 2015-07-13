@@ -3,14 +3,13 @@
 <span class="selected-info">{{model.selected.title}}</span> <span ng-if="model.selected">by</span> <span class="selected-info">{{model.selected.artist}} </span>
 
 <div class="row">
-  <div class ="col m6  cutup-list"ng-repeat="container in model.containers track by $index">
+  <div class ="col m6  cutup-list" ng-repeat="container in model.containers track by $index">
       <hr>
-      <ul ng-repeat="songs in container.songs"
-          dnd-list="songs">
-          <li ng-repeat="lyricObject in songs track by $index"
+      <ul dnd-list="container.lyrics">
+          <li ng-repeat="lyricObject in container.lyrics"
           dnd-draggable="lyricObject"
           dnd-effect-allowed="move"
-          dnd-moved="songs.splice($index, 1)"
+          dnd-moved="container.lyrics.splice($index, 1)"
           dnd-selected="model.selected = lyricObject"
           ng-class="{'selected': model.selected === lyricObject}">
             {{lyricObject.lyric}}

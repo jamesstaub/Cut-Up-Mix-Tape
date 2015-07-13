@@ -114,7 +114,7 @@ function filterLyrics(searchQuery, songsArray){
 function packageLyricSegments(songsArray){
   var lyricsArray = []
   songsArray.forEach(function(song){
-    var lyricObj = {}
+
     song.lyrics.forEach(function(lyric){
       lyricsArray.push({
           lyric:lyric,
