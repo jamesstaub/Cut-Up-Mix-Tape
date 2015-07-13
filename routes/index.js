@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var env = require('node-env-file');
 var path = require('path');
-
+var fuzzy = require('fuzzy-filter')
 
 /********** genius api *********/
 var token = process.env.GENIUS_ACCESS_TOKEN ||  env(path.join(__dirname, '../.env'));
@@ -10,9 +10,6 @@ var token = process.env.GENIUS_ACCESS_TOKEN ||  env(path.join(__dirname, '../.en
 // Instantiate a Genius instance:
 var Genius = require("node-genius");
 var geniusClient = new Genius(process.env.GENIUS_ACCESS_TOKEN);
-
-
-
 
 var searchGeniusPromise = function(searchQuery, transformer) {
   return new Promise(function(resolve, reject) {
