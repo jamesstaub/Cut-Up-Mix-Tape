@@ -10,6 +10,10 @@
         .when('/cutups', {
             templateUrl: 'views/cutup.html',
             controller: 'CutUpController'
+        })
+        .when('/cutups/:id', {
+            templateUrl: 'views/single.html',
+            controller: 'CutUpController'
         });
 
     $locationProvider.html5Mode(true);
