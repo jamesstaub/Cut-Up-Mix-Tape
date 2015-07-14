@@ -6,7 +6,7 @@ angular.module('cutupApp').factory('CutUp', ['$http', function($http) {
       };
 
     cutupFactory.getSingle = function(postID) {
-      console.log(postID);
+
       return $http.get('/api/cutups/'+ postID);
       };
 
