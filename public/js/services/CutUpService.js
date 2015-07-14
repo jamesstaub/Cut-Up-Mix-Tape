@@ -1,14 +1,12 @@
-angular.module('CutUpService', []).factory('CutUp', ['$http', function($http) {
+angular.module('cutupApp').factory('CutUp', ['$http', function($http) {
+    cutupFactory = {};
 
-    factory = {};
-    factory.get = function() {
-        return $http.get('/api').success(function(response){
-          angular.copy(response, factory.cutup)
-        });
-    };
+    cutupFactory.get = function() {
+      return $http.get('/api/cutups');
+      };
 
-    factory.cutup = [];
+    // cutupFactory.cutup = [];
 
-    return factory;
+    return cutupFactory;
 
 }]);

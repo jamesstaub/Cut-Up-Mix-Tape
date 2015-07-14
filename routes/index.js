@@ -134,6 +134,7 @@ function packageLyricSegments(songsArray){
 //   })
 // });
 
+
 /* GET home page. */
 router.get('/stanzas/:query', function(req, res) {
 

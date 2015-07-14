@@ -7,11 +7,10 @@
             templateUrl: 'views/home.html',
             controller: 'GeniusApiController'
         })
-        //
-        // .when('/cutups', {
-        //     templateUrl: 'views/cutup.html',
-        //     controller: 'GeniusApiController'
-        // });
+        .when('/cutups', {
+            templateUrl: 'views/cutup.html',
+            controller: 'CutUpController'
+        });
 
     $locationProvider.html5Mode(true);
 

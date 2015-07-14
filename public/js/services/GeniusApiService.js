@@ -1,4 +1,3 @@
-// angular.module('MainService', []).factory('Main', ['$http', function($http) {
 angular.module('cutupApp').factory('GeniusApi', ['$http', function($http) {
 
     geniusResponseFactory = {};

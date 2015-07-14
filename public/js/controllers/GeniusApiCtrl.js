@@ -1,6 +1,6 @@
 angular.module('cutupApp').controller('GeniusApiController', function($scope, GeniusApi) {
 
-  console.log("calls geniusapi the controller")
+  console.log("calls geniusapi the controller");
 
   $scope.queryGenius = function(query){
     console.log("calls the query");
@@ -34,22 +34,6 @@ angular.module('cutupApp').controller('GeniusApiController', function($scope, Ge
     });
   }
 
-  $scope.moveStanza = function(stanzaIndex, item){
-    // move the stanza from one model to the other
-    console.log(stanzaIndex + ' ' + item);
-
-  }
-
-
-  $scope.canDropHere = function(selectedType, destinationType ){
-    return true;
-    // return selectedType !== destinationType;
-
-  }
-
-  $scope.dropItem = function(item){
-    return item;
-  }
 
   //   // Model to JSON for demo purpose
   // $scope.$watch('lists', function(lists) {

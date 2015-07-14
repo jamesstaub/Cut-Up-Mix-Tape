@@ -1,6 +1,14 @@
 // public/js/controllers/NerdCtrl.js
-angular.module('CutUpCtrl', []).controller('CutUpController', function($scope) {
+angular.module('cutupApp').controller('CutUpController', function($scope, CutUp) {
 
-    $scope.tagline = 'make a new cutup';
+  console.log("calls cutup ctrller");
+
+  $scope.getCutups = function(){
+    Cutup.get().success(function(response){
+      $scope.cutups = response;
+    })
+  }
+
+
 
 });
