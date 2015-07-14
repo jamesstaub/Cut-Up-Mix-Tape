@@ -1,4 +1,4 @@
-angular.module('cutupApp').controller('GeniusApiController', function($scope, GeniusApi) {
+angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$location', 'GeniusApi', function($scope, $location, GeniusApi) {
 
   console.log("calls geniusapi the controller");
 
@@ -34,15 +34,24 @@ angular.module('cutupApp').controller('GeniusApiController', function($scope, Ge
     });
   }
 
+  $scope.saveCutup = function(cutup){
+    console.log('call the save in controller')
+    console.log(cutup)
+    GeniusApi.post(cutup).success(function(response){
+      console.log(response)
+      $location.path( "/cutups/" + response._id );
+    })
+  }
+
 
   //   // Model to JSON for demo purpose
   // $scope.$watch('lists', function(lists) {
   //   $scope.modelAsJson = angular.toJson(lists, true);
   // }, true);
 
-});
+}]);
 
 
 // TO DO, fix this dependency injection
-// GeniusApiController.$inject = ['GeniusApi'];
+// GeniusApiControllerller.$inject = ['GeniusApi'];
 

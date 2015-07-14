@@ -13,11 +13,11 @@ router.post('/', function(req, res) {
     new CutUp({
       title: req.body.title,
       content: req.body.content
-    }).save(function(err, contact) {
+    }).save(function(err, cutup) {
       if(err) {
         res.status(400).send('Error saving new cutup: ' + err);
       } else {
-        res.send("New cutup created");
+        res.send(cutup);
       }
     })
 });
@@ -52,7 +52,7 @@ router.route('/:cutup_id')
   .delete(function(req, res) {
     cutup.remove(function(err, cutup) {
       if(err) {
-        res.status(400).send("Error removing contact: " + err);
+        res.status(400).send("Error removing cutup: " + err);
       } else {
         res.send('CutUp removed');
       }

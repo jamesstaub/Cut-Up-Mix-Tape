@@ -8,5 +8,12 @@ angular.module('cutupApp').controller('CutUpController', function($scope, CutUp)
     })
   }
 
+  $scope.saveCutup = function(cutup){
+    CutUp.post(cutup).success(function(response){
+      console.log(response)
+      $location.path( "/cutups/" + response._id );
+    })
+  }
+
 
 });
