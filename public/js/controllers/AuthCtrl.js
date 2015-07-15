@@ -14,7 +14,7 @@ angular.module('cutupApp').controller('AuthController', [ '$scope', '$location',
   $scope.loginUser = function() {
     Auth.login($scope.account).success(function(response){
       Auth.setUser(response);
-      $location.path('/cutups')
+      $location.path('/')
       // $scope.currentUser = {set: Auth.isLoggedIn()};
 
     })

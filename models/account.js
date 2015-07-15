@@ -3,7 +3,11 @@ var mongoose = require('mongoose'),
     passportLocalMongoose = require('passport-local-mongoose');
 
 var Account = new Schema({
-  nickname: String
+  email: String,
+  cutups: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Cutup'
+          }]
 });
 
 Account.plugin(passportLocalMongoose);
