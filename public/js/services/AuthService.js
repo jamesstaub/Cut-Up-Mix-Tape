@@ -1,12 +1,27 @@
-angular.module('cutupApp').factory('Auth', function(){
-var user;
+angular.module('cutupApp').factory('Auth', ['$http', function($http){
 
-return{
-    setUser : function(aUser){
-        user = aUser;
+var currentUser = false;
+
+var auth = {
+    setUser : function(account){
+        currentUser = account;
     },
     isLoggedIn : function(){
-        return(user)? user : false;
+        return(currentUser)? currentUser : false;
+    },
+    register :  function(account){
+      return $http.post('/auth/register', account)
+    },
+    login :  function(account){
+      console.log("calls login method " + account)
+      return $http.post('/auth/login', account)
+    },
+    logout :  function(account){
+      currentUser = false;
+
+      return $http.get('/auth/logout')
     }
   }
-})
+
+  return auth;
+}]);

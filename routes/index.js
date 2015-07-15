@@ -81,14 +81,12 @@ function referantsByID(results) {
         }
       }) //end geniusClient.getReferants request
     });
-
     // console.log(songData)
     referentPromises.push(songData);
 
   })
   return referentPromises;
 }
-
 
 function searchGenius(searchQuery, transformer){
   // invoking the above promise with a transformer function as the second argument.
@@ -124,6 +122,7 @@ function packageLyricSegments(songsArray){
         })
     })
   })
+  console.log(lyricsArray);
   return lyricsArray;
 }
 
@@ -134,7 +133,6 @@ function packageLyricSegments(songsArray){
 //   })
 // });
 
-
 /* GET home page. */
 router.get('/stanzas/:query', function(req, res) {
 
@@ -143,7 +141,8 @@ router.get('/stanzas/:query', function(req, res) {
     return Promise.all(promiseResults)
   }).then(function(songsResultsArray){
     // console.log(packageLyricSegments(filterLyrics(req.params.query, songsResultsArray)));
-      res.json(packageLyricSegments(filterLyrics(req.params.query, songsResultsArray)));
+      var filteredResults = packageLyricSegments(filterLyrics(req.params.query, songsResultsArray));
+      res.json(filteredResults);
     }).catch(function(err){
       console.error(err);
       res.json(err);

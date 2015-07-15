@@ -4,7 +4,9 @@ var env = require('node-env-file');
 var CutUp = require('../models/cutup');
 
 router.get('/', function(req, res) {
-  CutUp.find( function(err, cutups) {
+  console.log("req user")
+  console.log(req.user);
+  CutUp.findById(req.user._id, function(err, cutups) {
     res.json(cutups);
   })
 });

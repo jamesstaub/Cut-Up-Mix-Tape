@@ -1,0 +1,16 @@
+ <nav>
+        <div class="nav-wrapper" ng-controller="AuthController">
+          <a href="/" class="brand-logo">cutup mixtape</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <ul class="me">
+                  <li ng-show="auth.isLoggedIn()">hi {{auth.isLoggedIn().username}}</li>
+                  <li ng-show="auth.isLoggedIn()"><a href="#" ng-click="logoutUser(); " title="logout"> Logout</a></li>
+                  <li ng-show="!auth.isLoggedIn()"><a href="/login" title="login"> Login</a></li>
+                  <li ng-show="!auth.isLoggedIn()"><a href="/register" title="register"> Register</a></li>
+               </ul>
+
+            </ul>
+
+
+        </div>
+      </nav>

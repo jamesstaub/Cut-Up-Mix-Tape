@@ -5,6 +5,7 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
   $scope.queryGenius = function(query){
     console.log("calls the query");
     GeniusApi.get(query).success(function(response) {
+      console.log(response)
       // model for the api lyrics and the
       $scope.model = {
         containers: [

@@ -1,0 +1,20 @@
+ <h4>Login</h4>
+ <div class="row">
+  <form class="col s12" name="loginForm">
+  <div class="row">
+    <div class="input-field col s12">
+        <input id="username" type="text" class="validate" ng-model="account.username" required />
+        <label for="username">Username</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="password" type="password" class="validate" ng-model="account.password" required />
+        <label for="password">Password</label>
+      </div>
+    </div>
+    <button ng-click="loginForm.$valid && loginUser()" ng-disabled="loginForm.$invalid" class=" modal-action modal-close waves-effect waves-green btn-flat">submit</button>
+  </form>
+
+
+</div>

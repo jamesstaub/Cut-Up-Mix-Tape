@@ -1,9 +1,11 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
   color: #00b7ff;
+}
+.me li {
+  display: inline;
 }
 .cutup-list ul[dnd-list],
 .cutup-list ul[dnd-list] > li {

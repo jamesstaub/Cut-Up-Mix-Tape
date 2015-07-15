@@ -1,4 +1,3 @@
-
 <query></query>
 <span class="selected-info">{{model.selected.title}}</span> <span ng-if="model.selected">by</span> <span class="selected-info">{{model.selected.artist}} </span>
 
@@ -6,7 +5,7 @@
   <div class ="col m6  cutup-list" ng-repeat="container in model.containers track by $index">
       <hr>
       <ul dnd-list="container.lyrics">
-          <li ng-repeat="lyricObject in container.lyrics"
+          <li ng-repeat="lyricObject in container.lyrics track by $index"
           dnd-draggable="lyricObject"
           dnd-effect-allowed="move"
           dnd-moved="container.lyrics.splice($index, 1)"
