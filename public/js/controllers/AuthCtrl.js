@@ -27,6 +27,20 @@ angular.module('cutupApp').controller('AuthController', [ '$scope', '$location',
     })
   };
 
+  var init = function(){
+      Auth.getUser()
+      .success(function(res){
+        if (res.message === "unAuthenticated"){
+           $location.path('/');
+        } else {
+          Auth.setUser(res)
+        }
+      }).error(function(err){
+          // $location.path('/');
+      });
+  }
+  init();
+
 
 
   // $scope.$watch('Auth.isLoggedIn()', function(newVal) {

@@ -3,10 +3,24 @@ var Account = require('../models/account');
 var express = require('express');
 var router = express.Router();
 
+
+var isAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()){
+    return next();
+  } else {
+    console.log("not logged in ");
+    // res.status(401);
+    res.end();
+  }
+}
+
+
+router.get('/user', isAuthenticated, function(req, res) {
+  res.send(req.user);
+});
+
+
 router.route('/register')
-  // .get(function(req, res, next) {
-  //   // taken care of by angular
-  // })
   .post(function(req, res, next) {
     Account.register(new Account({username: req.body.username}), req.body.password, function(err, account) {
       if(err) {

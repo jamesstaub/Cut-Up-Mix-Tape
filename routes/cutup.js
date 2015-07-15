@@ -10,15 +10,12 @@ router.get('/', function(req, res) {
       if(err){
         console.error(err);
       }else{
-        console.log("8===========D found user by ID")
-        console.log(account)
         CutUp.find({
           _id : {$in: account.cutups }
         }, function(err, cutups){
           if(err){
             console.error(err)
           }else{
-            console.log("8=========D found cutups from users list")
             console.log(account)
             res.json(cutups);
           }

@@ -19,9 +19,17 @@ var auth = {
     logout :  function(account){
       currentUser = false;
 
-      return $http.get('/auth/logout')
+      return $http.get('/auth/logout');
+    },
+
+    getUser : function(){
+      console.log("calls get user!");
+      return  $http.get('/auth/user');
     }
+
   }
 
   return auth;
 }]);
+
+
