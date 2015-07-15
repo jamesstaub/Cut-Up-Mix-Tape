@@ -96,12 +96,16 @@ function searchGenius(searchQuery, transformer){
 // apply fuzzy filtering to the lyrics array search results
 function filterLyrics(searchQuery, songsArray){
   return songsArray.map(function(song){
+    // console.log(song);
     var filteredSong = {
           title: song.title,
           artist: song.artist,
           id: song.id,
           lyrics: fuzzy(searchQuery, song.lyrics)
         }
+
+
+
     if(filteredSong.lyrics.length){
       return filteredSong;
     }
@@ -112,8 +116,10 @@ function filterLyrics(searchQuery, songsArray){
 function packageLyricSegments(songsArray){
   var lyricsArray = []
   songsArray.forEach(function(song){
-
-    song.lyrics.forEach(function(lyric){
+// console.log("--log for each song")
+// console.log(song)
+ // song must be truthy for the foreach to run
+    song && song.lyrics.forEach(function(lyric){
       lyricsArray.push({
           lyric:lyric,
           title: song.title,
@@ -122,7 +128,7 @@ function packageLyricSegments(songsArray){
         })
     })
   })
-  console.log(lyricsArray);
+  // console.log(lyricsArray);
   return lyricsArray;
 }
 
@@ -138,14 +144,16 @@ router.get('/stanzas/:query', function(req, res) {
 
   // invoke the initial search request, whith the transformer argument function which makes further requests
   searchGenius(req.params.query, referantsByID).then(function(promiseResults){
+
     return Promise.all(promiseResults)
   }).then(function(songsResultsArray){
+    // console.log(songsResultsArray);
     // console.log(packageLyricSegments(filterLyrics(req.params.query, songsResultsArray)));
       var filteredResults = packageLyricSegments(filterLyrics(req.params.query, songsResultsArray));
       res.json(filteredResults);
     }).catch(function(err){
       console.error(err);
-      res.json(err);
+      res.sendStatus(err);
     })
 });
 
