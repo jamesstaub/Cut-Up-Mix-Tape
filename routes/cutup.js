@@ -5,32 +5,30 @@ var CutUp = require('../models/cutup');
 var Account = require('../models/account');
 
 router.get('/', function(req, res) {
-  CutUp.findById(req.user._id, function(err, cutups) {
-    res.json(cutups);
-  })
+  if(req.user){
+    Account.findById(req.user._id, function(err, account) {
+      if(err){
+        console.error(err);
+      }else{
+        console.log("8===========D found user by ID")
+        console.log(account)
+        CutUp.find({
+          _id : {$in: account.cutups }
+        }, function(err, cutups){
+          if(err){
+            console.error(err)
+          }else{
+            console.log("8=========D found cutups from users list")
+            console.log(account)
+            res.json(cutups);
+          }
+        })
+      }
+    })
+  }else{
+    res.json({error: "log in to view your cutups"})
+  }
 });
-
-// router.post('/', function(req, res) {
-//     new CutUp({
-//       title: req.body.title,
-//       content: req.body.content
-//     }).save(function(err, cutup) {
-//       if(err) {
-//         res.status(400).send('Error saving new cutup: ' + err);
-//       } else {
-//         console.log("next we'll find by id and update");
-//         Account.findByIdAndUpdate(req.user._id, {$push: {cutups : cutup._id}}, function(err, user){
-//           if(err){
-//             console.error(err);
-//           }else{
-//             console.log("found and added cutup to user");
-//             console.log(user)
-//           }
-//         })
-//         res.send(cutup);
-//       }
-//     })
-// });
 
 router.post('/', function(req, res) {
   CutUp.create({
@@ -41,25 +39,17 @@ router.post('/', function(req, res) {
       res.status(400).send('Error saving new cutup: ' + err);
     } else {
       console.log("next we'll find by id and update");
-      Account.findByIdAndUpdate(req.user._id, {$push: {cutups : cutup._id}}, function(err, user){
+      Account.findByIdAndUpdate(req.user._id, {$push: {cutups : cutup._id}}, function(err, account){
         if(err){
           console.error(err);
         }else{
-          console.log("found and added cutup to user");
-          console.log(user)
+          console.log("found and added cutup to account");
+          console.log(account)
         }
       })
     }
   });
 });
-
-
-
-
-
-
-
-
 
 router.route('/:cutup_id')
   .all(function(req, res, next) {

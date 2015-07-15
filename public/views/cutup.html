@@ -1,9 +1,10 @@
 <div class="row">
-  <h2>your cututps</h2>
+  <h2 ng-hide="cutups.error">your cututps</h2>
+  <h2 ng-show="cutups.error">{{cutups.error}}<h2>
   <div class="cutup-list" ng-init="getCutupsList()">
-
-      <div ng-repeat="cutup in cutups">
+      <div ng-repeat="cutup in cutups track by $index">
       <p>{{cutup.title}}</p>
+
       </div>
   </div>
 
