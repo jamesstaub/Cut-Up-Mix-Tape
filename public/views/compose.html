@@ -1,12 +1,14 @@
+ <textarea ng-change="parseMessage(4)" ng-model="messageInput" placeholder="write a message"></textarea>
+
 <div class="row cutup-editor">
   <div class ="col m6  cutup-list" ng-repeat="container in model.containers track by $index">
 
   <div ng-if="container === model.containers[1]" >
-    <input type="text" name="q" ng-model="query" ng-change="queryGenius(query)" placeholder="enter a message">
+    <!-- <input type="text" name="q" ng-model="query" ng-change="queryGenius(query)" placeholder="enter a message"> -->
   </div>
 
   <div ng-if="container === model.containers[0]" >
-    <input type="text" ng-model="model.containers[1].title" placeholder="enter a title"/>
+    <input type="text" ng-model="model.containers[0].title" placeholder="enter a title"/>
   </div>
   <h3>{{container.title}}</h3>
     <div class="lists">
