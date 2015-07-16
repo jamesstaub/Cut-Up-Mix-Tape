@@ -1,39 +1,38 @@
 angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$location', 'GeniusApi', function($scope, $location, GeniusApi) {
 
-  console.log("calls geniusapi the controller");
+
+
+  $scope.parseMessage = function(len){
+    var messageSegments = GeniusApi.parseString(len, $scope.messageInput );
+    messageSegments.forEach(function(seg){
+      // seg
+    })
+    console.log(messageSegments);
+  }
 
   $scope.queryGenius = function(query){
-    console.log("calls the query");
+    console.log("calls the query " + query );
     GeniusApi.get(query).success(function(response) {
-      console.log(response)
+      $scope.model.containers[0].lyrics = response;
+      console.log($scope.model.containers[0].lyrics)
       // model for the api lyrics and the
-      $scope.model = {
-        containers: [
-          {
-            type: 'results',
-            title: 'search results',
-            lyrics: response
-          },
-          {
-            type: 'cutup',
-            title: 'your cutup title',
-            lyrics: [
-              {
-                artist: 'Mac Miller',
-                lyric: 'Oh well, it\'ll be OK...'
-              },
-              {
-                title: 'OK',
-                artist: 'Mac Miller',
-                lyric: 'How many hoes want to clean Mac\'s beard?'
-              }
-            ]
-          }
-        ],
-        selected: null
-      }
     });
   }
+  $scope.model = {
+      containers: [
+        {
+          type: 'results',
+          title: 'search results',
+          lyrics: $scope.queryResponse
+        },
+        {
+          type: 'cutup',
+          title: 'enter a title',
+          lyrics: []
+        }
+      ],
+      selected: null
+    }
 
   $scope.saveCutup = function(cutup){
     console.log('call the save in controller')

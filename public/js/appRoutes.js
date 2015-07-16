@@ -4,7 +4,7 @@
     $routeProvider
         // home page
         .when('/', {
-            templateUrl: 'views/home.html',
+            templateUrl: 'views/inputmessage.html',
             controller: 'GeniusApiController'
         })
         .when('/cutups', {
