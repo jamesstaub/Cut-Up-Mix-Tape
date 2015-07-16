@@ -8,7 +8,7 @@
             controller: 'GeniusApiController'
         })
         .when('/cutups', {
-            templateUrl: 'views/cutup.html',
+            templateUrl: 'views/list.html',
             controller: 'CutUpController'
         })
         .when('/cutups/:id', {

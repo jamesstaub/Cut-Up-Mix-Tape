@@ -1,40 +1,14 @@
- <textarea ng-change="parseMessage(4)" ng-model="messageInput" placeholder="write a message"></textarea>
-
-<div class="row cutup-editor">
-  <div class ="col m6  cutup-list" ng-repeat="container in model.containers track by $index">
-
-  <div ng-if="container === model.containers[1]" >
-    <!-- <input type="text" name="q" ng-model="query" ng-change="queryGenius(query)" placeholder="enter a message"> -->
+<div class="row">
+  <div class="col s12">
+    <button class="btn waves-effect waves-light cutup-ctrl" type="text" ng-click="interface = 'input' ">input message
+    </button>
+    <button class="btn waves-effect waves-light cutup-ctrl" type="text" ng-click="interface = 'dragdrop'; inputMessage.parse(4)">cut it up
+    </button>
   </div>
-
-  <div ng-if="container === model.containers[0]" >
-    <input type="text" ng-model="model.containers[0].title" placeholder="enter a title"/>
-  </div>
-  <h3>{{container.title}}</h3>
-    <div class="lists">
-      <ul dnd-list="container.lyrics">
-            <!-- maybe fix this error some day... -->
-            <li ng-repeat="lyricObject in container.lyrics"
-            dnd-draggable="lyricObject"
-            dnd-effect-allowed="move"
-            dnd-moved="container.lyrics.splice($index, 1)"
-            dnd-selected="model.selected = lyricObject"
-            ng-class="{'selected': model.selected === lyricObject}">
-              {{lyricObject.lyric}}
-            </li>
-        </ul>
-    </div>
-
-    </div>
 </div>
 
-<div class='panel'>
-  <div class='row'>
-    <div class="col m9 song-info">
-      <span class="selected-info">{{model.selected.title}}</span> <span ng-if="model.selected">by</span>
-      <span class="selected-info">{{model.selected.artist}}</span>
-    </div>
-      <a class="save-button waves-effect waves-light btn-large" ng-click="saveCutup(model.containers[0])">save</a>
-  </div>
+<div class="row" ng-init="interface='input'">
+  <div ng-show="interface === 'input'" ng-include src="'views/partials/input.html'"></div>
+  <div ng-show="interface === 'dragdrop'" ng-include src="'views/partials/dragdrop.html'"></div>
 </div>
 

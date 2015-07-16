@@ -13,18 +13,26 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
       selected: null
     }
 
-  $scope.parseMessage = function(len){
-    var messageSegments = GeniusApi.parseString(len, $scope.messageInput );
-// don't make blank requests dummy
-    if(messageSegments.length){
+
+  $scope.inputMessage = {
+    set: function(msg){
+      this.value = msg
+    },
+    get: function(){
+      return this.value;
+    },
+    parse: function(len){
+      console.log(this.value);
+      var messageSegments = GeniusApi.parseString(len, this.value);
+      // don't make blank requests dummy
+      if(messageSegments.length){
       // var cutup = $scope.model.containers.shift();
       // $scope.model.containers = [cutup];
-      messageSegments.forEach(function(seg){
-        GeniusApi.get(seg)
+        messageSegments.forEach(function(seg){
+          GeniusApi.get(seg)
           .success(function(data){
             $scope.model.containers.push({
               type: 'results',
-              title: 'search results',
               query: seg,
               lyrics: data
             });
@@ -32,8 +40,12 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
           .error(function(data, status) {
             console.error('error', status, data);
           });
-      });
-    }
+        });
+      }
+    },
+
+    value: ''
+
   }
 
 

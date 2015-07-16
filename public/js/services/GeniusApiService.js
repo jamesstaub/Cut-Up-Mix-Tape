@@ -22,7 +22,8 @@ angular.module('cutupApp').factory('GeniusApi', ['$http', function($http) {
           seg = '';
         }
       }
-      return segments;
+      return a;
+      // return segments;
     }
 
     // geniusResponseFactory.geniusResults = [];
