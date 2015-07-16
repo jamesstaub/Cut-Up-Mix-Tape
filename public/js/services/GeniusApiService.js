@@ -18,7 +18,6 @@ angular.module('cutupApp').factory('GeniusApi', ['$http', function($http) {
       for(var i=0; i < a.length; i++){
         seg += a[i]+' ';
         if(i % len === len -1){
-          console.log("push")
           segments.push(seg);
           seg = '';
         }
