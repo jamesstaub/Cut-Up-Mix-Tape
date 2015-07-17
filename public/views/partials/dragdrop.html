@@ -10,7 +10,7 @@
   </div>
   <!-- <h3>{{container.title || container.query}}</h3> -->
     <div class="lists">
-    <h4 ng-show="!model.containers[0].lyrics.length && model.containers[1].lyrics.length && container.type === 'cutup'">drag lyrics here</h4>
+    <h4 ng-show="!model.containers[0].lyrics.length && model.containers[1].lyrics.length && container.type === 'cutup'"><em>drag lyrics here</em></h4>
       <ul dnd-list="container.lyrics">
             <!-- maybe fix this error some day... -->
             <li ng-repeat="lyricObject in container.lyrics"
@@ -27,3 +27,5 @@
 </div>
 
       <a class="save-button waves-effect waves-light btn-large" ng-click="saveCutup(model.containers[0])">save</a>
+
+

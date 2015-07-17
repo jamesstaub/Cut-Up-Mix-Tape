@@ -1,5 +1,5 @@
 body {
-  font: 14px "Courier", sans-serif;
+  font: 24px "Courier", sans-serif;
 }
 nav {
   background-color: #000;
@@ -22,12 +22,16 @@ button .cutup-ctrl {
   font-size: 24px;
 }
 input {
-  font-size: 32px;
+  font-size: 32px !important;
   height: 100%;
   border: solid 1px transparent;
   text-align: center;
   outline: 0px !important;
   -webkit-appearance: none;
+}
+.col-results {
+  height: 400px;
+  overflow: scroll;
 }
 .panel {
   background-color: #000;
@@ -39,9 +43,8 @@ input {
   bottom: 0px;
   left: 0;
 }
-.panel h4 {
-  font-size: 18px;
-  display: inline;
+.panel h3 {
+  font-size: 24px;
 }
 .img-container {
   width: 300px;

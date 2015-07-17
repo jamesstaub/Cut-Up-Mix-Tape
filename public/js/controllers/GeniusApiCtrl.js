@@ -12,10 +12,8 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
       ],
       selected: null
     }
-
+// timeout to slow down the rate of requests from input field
   var _timeout;
-
-
   $scope.inputMessage = {
     set: function(msg){
       this.value = msg;
@@ -47,9 +45,9 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
     value: ''
   }
 
-
-  $scope.clear = function(){
-   $scope.model.containers[1] = {
+  $scope.clearComposition = function(){
+  console.log("clear you fuck")
+   $scope.model.containers[0] = {
         type: 'results',
         query: this.value,
         lyrics: ''

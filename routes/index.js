@@ -31,20 +31,20 @@ var searchGeniusPromise = function(searchQuery, transformer) {
   })
 }
 
-// transformer functions to filter the results of the genius search request
 
-// list title and artist of the search results
-// function listResults(results){
-//   var geniusResults = [];
-//   results.response.hits.forEach(function(h) {
-//     var song = {
-//       title: h.result.title,
-//       artist: h.result.primary_artist.name
-//     }
-//     geniusResults.push(song);
-//   });
-//   return geniusResults
-// }
+// transformer functions to filter the results of the genius search request
+// not used but this could list title and artist of the search results
+function listResults(results){
+  var geniusResults = [];
+  results.response.hits.forEach(function(h) {
+    var song = {
+      title: h.result.title,
+      artist: h.result.primary_artist.name
+    }
+    geniusResults.push(song);
+  });
+  return geniusResults
+}
 
 
 function referantsByID(results) {
@@ -122,10 +122,9 @@ function filterLyrics(searchQuery, songsArray){
           id: song.id,
           artist_img : song.artist_img,
           // lyrics: fuzzy(searchQuery, song.lyrics, {limit: 2})
-          // lyrics: song.lyrics
-          lyrics: filterLinesByMatch(searchQuery, song.lyrics)
+          lyrics: song.lyrics
+          // lyrics: filterLinesByMatch(searchQuery, song.lyrics)
         }
-
 
     if(filteredSong.lyrics.length){
       return filteredSong;

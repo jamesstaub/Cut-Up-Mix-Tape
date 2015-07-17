@@ -6,11 +6,12 @@ angular.module('cutupApp').factory('GeniusApi', ['$http', function($http) {
     }
 
     geniusResponseFactory.post = function(cutup){
+      console.log("post req to save this here cutup")
       return $http.post('/api/cutups', cutup)
     }
 
     geniusResponseFactory.parseString = function(msg){
-      var segments = msg.match(/[^ ]+( +[^ ]+){0,4}/g);
+      // var segments = msg.match(/[^ ]+( +[^ ]+){0,4}/g);
       return segments;
     }
 

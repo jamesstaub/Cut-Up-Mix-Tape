@@ -31,6 +31,8 @@ router.get('/', function(req, res) {
 // Handle this request if there is no logged in user.
 // could make an anonymous account and save it to that!
 router.post('/', function(req, res) {
+console.log('=============>>>>>>>>')
+  console.log(req.body.content)
   CutUp.create({
     title: req.body.title,
     content: req.body.content
