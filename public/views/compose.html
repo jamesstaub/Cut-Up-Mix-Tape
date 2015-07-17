@@ -1,14 +1,17 @@
-<div class="row">
-  <div class="col s12">
-    <button class="btn waves-effect waves-light cutup-ctrl" type="text" ng-click="interface = 'input' ">input message
-    </button>
-    <button class="btn waves-effect waves-light cutup-ctrl" type="text" ng-click="interface = 'dragdrop'; inputMessage.parse(4)">cut it up
-    </button>
-  </div>
+<div class="row" ng-init="interface='input'">
+  <div ng-include src="'views/partials/input.html'"></div>
+  <div ng-include src="'views/partials/dragdrop.html'"></div>
 </div>
 
-<div class="row" ng-init="interface='input'">
-  <div ng-show="interface === 'input'" ng-include src="'views/partials/input.html'"></div>
-  <div ng-show="interface === 'dragdrop'" ng-include src="'views/partials/dragdrop.html'"></div>
+<div class='panel'>
+  <div class='row'>
+    <div class="img-container">
+      <img src="{{model.selected.artist_img}}" alt="">
+    </div>
+    <div class="col m9 song-info">
+      <span class="selected-info"><h4>{{model.selected.title}}</h4></span> <span ng-if="model.selected">by</span>
+      <span class="selected-info"><h4>{{model.selected.artist}}</h4></span>
+    </div>
+  </div>
 </div>
 

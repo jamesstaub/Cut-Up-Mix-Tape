@@ -1,4 +1,4 @@
-angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$location', 'GeniusApi', function($scope, $location, GeniusApi) {
+angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$location', '$timeout', 'GeniusApi', function($scope, $location, $timeout, GeniusApi) {
 
 
   // the 0th object in the containers array is the cutup that the user creates, all subsequent containers store results to particular requests
@@ -13,58 +13,57 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
       selected: null
     }
 
+  var _timeout;
+
 
   $scope.inputMessage = {
     set: function(msg){
-      this.value = msg
+      this.value = msg;
     },
     get: function(){
       return this.value;
     },
-    parse: function(len){
-      console.log(this.value);
-      var messageSegments = GeniusApi.parseString(len, this.value);
-      // don't make blank requests dummy
-      if(messageSegments.length){
-      // var cutup = $scope.model.containers.shift();
-      // $scope.model.containers = [cutup];
-        messageSegments.forEach(function(seg){
-          GeniusApi.get(seg)
-          .success(function(data){
-            $scope.model.containers.push({
-              type: 'results',
-              query: seg,
-              lyrics: data
-            });
-          })
-          .error(function(data, status) {
-            console.error('error', status, data);
-          });
-        });
-      }
+    queryGenius: function(){
+      console.log('query' + this.value)
+      GeniusApi.get(this.value).success(function(data) {
+        console.log(data);
+        $scope.model.containers[1] = {
+          type: 'results',
+          query: this.value,
+          lyrics: data
+        }
+      });
     },
-
+    timeOut: function(){
+      var self = this;
+      if(_timeout){ //if there is already a timeout in process cancel it
+        $timeout.cancel(_timeout);
+      }
+      _timeout = $timeout(function(){
+      self.queryGenius(this.value)
+        _timeout = null;
+      },300);
+    },
     value: ''
-
   }
 
 
-  $scope.queryGenius = function(query){
-    console.log("calls the query " + query );
-    GeniusApi.get(query).success(function(response) {
-      $scope.model.containers[1].lyrics = response;
-      console.log($scope.model.containers[1].lyrics)
-      // model for the api lyrics and the
-    });
+  $scope.clear = function(){
+   $scope.model.containers[1] = {
+        type: 'results',
+        query: this.value,
+        lyrics: ''
+      }
   }
 
   $scope.saveCutup = function(cutup){
-    console.log('call the save in controller')
-    console.log(cutup)
     GeniusApi.post(cutup).success(function(response){
-      console.log(response)
+      console.log("successfully saved");
+      console.log(response._id)
       $location.path( "/cutups/" + response._id );
-    })
+    }).error(function(err) {
+      console.error(err);
+    });
   }
 
 }]);

@@ -27,6 +27,9 @@ router.get('/', function(req, res) {
   }
 });
 
+// TO DO
+// Handle this request if there is no logged in user.
+// could make an anonymous account and save it to that!
 router.post('/', function(req, res) {
   CutUp.create({
     title: req.body.title,
@@ -35,8 +38,10 @@ router.post('/', function(req, res) {
     if(err) {
       res.status(400).send('Error saving new cutup: ' + err);
     } else {
+      console.log(cutup)
       console.log("next we'll find by id and update");
-      Account.findByIdAndUpdate(req.user._id, {$push: {cutups : cutup._id}}, function(err, account){
+      Account.findByIdAndUpdate(req.user._id, {
+        $push: {cutups : cutup._id}}, function(err, account){
         if(err){
           console.error(err);
         }else{
@@ -44,6 +49,7 @@ router.post('/', function(req, res) {
           console.log(account)
         }
       })
+      res.json(cutup);
     }
   });
 });

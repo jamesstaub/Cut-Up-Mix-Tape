@@ -17,7 +17,7 @@ angular.module('cutupApp').controller('CutUpController', function($scope, $route
     $scope.getOneCutup = function(){
       console.log($routeParams.id)
       console.log("call the get one function");
-    CutUp.getSingle($routeParams.id).success(function(response){
+      CutUp.getSingle($routeParams.id).success(function(response){
       $scope.cutup = response;
 
     }).error(function(err){

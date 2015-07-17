@@ -21,7 +21,7 @@ button .cutup-ctrl {
   height: 48px;
   font-size: 24px;
 }
-textarea {
+input {
   font-size: 32px;
   height: 100%;
   border: solid 1px transparent;
@@ -29,17 +29,34 @@ textarea {
   outline: 0px !important;
   -webkit-appearance: none;
 }
-.lists {
-  max-height: 500px;
-  overflow: scroll;
-}
 .panel {
+  background-color: #000;
+  color: #fff;
   position: fixed;
+  padding: 15px;
   width: 100%;
-  bottom: 0;
+  height: 200px;
+  bottom: 0px;
+  left: 0;
+}
+.panel h4 {
+  font-size: 18px;
+  display: inline;
+}
+.img-container {
+  width: 300px;
+  float: left;
+}
+.img-container img {
+  width: auto;
+  height: 180px;
 }
 .save-button {
   float: right;
+  margin-right: 20px;
+}
+.col-cutup {
+  float: right !important;
 }
 .cutup-list ul[dnd-list],
 .cutup-list ul[dnd-list] > li {

@@ -1,15 +1,16 @@
 <div class="row cutup-editor">
-  <div class ="col m6  cutup-list" ng-repeat="container in model.containers track by $index">
+  <div class ="col m6  cutup-list col-{{container.type}}" ng-repeat="container in model.containers track by $index">
 
   <div ng-if="container === model.containers[1]" >
     <!-- <input type="text" name="q" ng-model="query" ng-change="queryGenius(query)" placeholder="enter a message"> -->
   </div>
 
   <div ng-if="container === model.containers[0]" >
-    <input type="text" ng-model="model.containers[0].title" placeholder="enter a title"/>
+    <!-- <input type="text" ng-model="model.containers[0].title" placeholder="enter a title"/> -->
   </div>
-  <h3>{{container.title || container.query}}</h3>
+  <!-- <h3>{{container.title || container.query}}</h3> -->
     <div class="lists">
+    <h4 ng-show="!model.containers[0].lyrics.length && model.containers[1].lyrics.length && container.type === 'cutup'">drag lyrics here</h4>
       <ul dnd-list="container.lyrics">
             <!-- maybe fix this error some day... -->
             <li ng-repeat="lyricObject in container.lyrics"
@@ -25,13 +26,4 @@
     </div>
 </div>
 
-<div class='panel'>
-  <div class='row'>
-    <div class="col m9 song-info">
-      <span class="selected-info">{{model.selected.title}}</span> <span ng-if="model.selected">by</span>
-      <span class="selected-info">{{model.selected.artist}}</span>
-    </div>
       <a class="save-button waves-effect waves-light btn-large" ng-click="saveCutup(model.containers[0])">save</a>
-  </div>
-</div>
-

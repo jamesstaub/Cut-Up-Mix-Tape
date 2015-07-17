@@ -16,7 +16,7 @@ var geniusClient = new Genius(process.env.GENIUS_ACCESS_TOKEN);
 var searchGeniusPromise = function(searchQuery, transformer) {
   return new Promise(function(resolve, reject) {
     // hacked the node-genius npm module to allow per_page length as optional second argument of .search method. evenutally could clean up and make less hacky.
-    geniusClient.search(searchQuery, 8, function(error, results) {
+    geniusClient.search(searchQuery, 10, function(error, results) {
       if (error) {
         reject(error);
         // console.error("Whops. Something went wrong:", error);
@@ -93,22 +93,46 @@ function searchGenius(searchQuery, transformer){
   return searchGeniusPromise(searchQuery, transformer);
 }
 
-// apply fuzzy filtering to the lyrics array search results
+// regex matching to clean up search results. this could be vastly improved
+var matchAny =  function(target, destination) {
+  var matcher = target.split(' ').reduce(function(prev, current){
+    return  prev + ' | ' + current
+  });
+  var regex = new RegExp(matcher, 'i');
+  return regex.test(destination);
+}
+
+// keeps any lines that contain any words from target
+var filterLinesByMatch = function(target, array){
+  return array.filter(function(line){
+    return matchAny(target, line)
+  })
+}
+
+
 function filterLyrics(searchQuery, songsArray){
   return songsArray.map(function(song){
+    // queryInResult()
     // console.log(song);
+    console.log("-----------")
+    console.log(song)
     var filteredSong = {
           title: song.title,
           artist: song.artist,
           id: song.id,
-          lyrics: fuzzy(searchQuery, song.lyrics)
+          artist_img : song.artist_img,
+          // lyrics: fuzzy(searchQuery, song.lyrics, {limit: 2})
+          // lyrics: song.lyrics
+          lyrics: filterLinesByMatch(searchQuery, song.lyrics)
         }
+
 
     if(filteredSong.lyrics.length){
       return filteredSong;
     }
   })
 }
+
 
 // reformats song results into an array that can be consumed by the front end drang and drop
 function packageLyricSegments(songsArray){
@@ -122,6 +146,7 @@ function packageLyricSegments(songsArray){
           lyric:lyric,
           title: song.title,
           artist: song.artist,
+          artist_img : song.artist_img,
           id: song.id
         })
     })
