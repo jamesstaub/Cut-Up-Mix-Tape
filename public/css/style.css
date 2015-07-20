@@ -31,7 +31,7 @@ input {
 }
 .lists span {
   position: absolute;
-  top: -30px;
+  top: -20px;
 }
 .cutup-list {
   height: 60vh;
@@ -92,8 +92,9 @@ input {
 }
 .cutup-list ul[dnd-list] li.selected {
   color: #26a69a;
+  padding: 10px;
 }
 .lyric-controls {
-  padding: 10px;
+  padding: 5px 10px;
   float: right;
 }

@@ -6,6 +6,9 @@
     "angular-route": "latest",
     "materialize": "latest",
     "ngDraggable": "~0.1.8",
-    "dndLists": "~1.2.0"
+    "dndLists": "~1.2.0",
+    "bower": "*",
+    "install": "~1.0.4",
+    "angular-rangeslider": "~0.0.14"
   }
 }

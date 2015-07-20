@@ -1,3 +1,4 @@
+<div ng-include src="'views/partials/trimmer.html'"></div>
 <div class="row" ng-init="interface='input'">
   <div ng-include src="'views/partials/dragdrop.html'"></div>
 </div>
@@ -9,7 +10,6 @@
       <span class="selected-info"><h4>{{model.selected.artist}}</h4></span>
     </div>
     <div class="img-container col m4">
-
       <img ng-if="model.selected.artist_img" src="{{model.selected.artist_img}}" alt="{{model.selected.artist}}">
     </div>
     <div class="col m4 song-info">

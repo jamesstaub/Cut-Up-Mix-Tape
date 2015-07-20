@@ -1,0 +1,13 @@
+<div ng-show="editComposition.trimEditor">
+  {{trimString}}
+  <div class="trim-slider"
+  range-slider min="0"
+  max="maxLen"
+  model-min="userMin"
+  model-max="userMax"
+  on-handle-up="editComposition.hightlight()"
+  on-handle-down="editComposition.hightlight()"
+  ></div>
+
+</div>
+

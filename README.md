@@ -62,3 +62,5 @@ iterative development prioritizes the bare minimum functionality, and incrementa
 https://github.com/alexbooker/node-genius
 
 https://github.com/marceljuenemann/angular-drag-and-drop-lists
+
+https://github.com/danielcrisp/angular-rangeslider

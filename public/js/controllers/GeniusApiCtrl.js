@@ -1,6 +1,5 @@
 angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$location', '$timeout', 'GeniusApi', function($scope, $location, $timeout, GeniusApi) {
 
-
   // the 0th object in the containers array is the cutup that the user creates, all subsequent containers store results to particular requests
   $scope.model = {
       containers: [
@@ -49,7 +48,7 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
     value: ''
   }
 
-
+// for editing and deleting individual lyric segments
   $scope.editComposition = {
     clearAll: function(){
       $scope.model.containers[0] = {
@@ -57,7 +56,31 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
         query: this.value,
         lyrics: ''
       }
-    }
+    },
+    trim: function(){
+      this.trimEditor = true;
+      this.splitLyricArray = $scope.model.selected.lyric.split(' ');
+      // set available range
+      $scope.minLen = 0;
+      $scope.maxLen = this.splitLyricArray.length;
+
+      // default the user's values to the available range
+      $scope.userMin = $scope.minLen;
+      $scope.userMax = $scope.maxLen;
+
+    },
+
+    hightlight: function(){
+      console.log("hightlight")
+      if(this.lyricArray){
+        this.splitLyricArray.map(function(e){
+          return '<span class="highlighted">'+e+'</span>';
+        });
+        $scope.trimString = this.splitLyricArray.join(separator = ' ')
+      }
+    },
+    lyricArray: '',
+    trimEditor: false,
 
   }
 
