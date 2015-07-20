@@ -1,28 +1,34 @@
 <div class="row cutup-editor">
+
+  <div class="row">
+    <div class="col m6">
+          <div class="input-field" ng-include src="'views/partials/input.html'"></div>
+    </div>
+    <div class="col m6">
+      <!-- title -->
+    </div>
+  </div>
   <div class ="col m6  cutup-list col-{{container.type}}" ng-repeat="container in model.containers track by $index">
-
-
-
     <div class="lists">
-
       <div ng-show="container.type === 'loading'" >
         <div class="loading" ng-include src="'views/partials/loading.html'"></div>
       </div>
 
-    <h4 ng-show="!model.containers[0].lyrics.length && model.containers[1].lyrics.length && container.type === 'cutup'"><em>drag lyrics here</em></h4>
+      <span ng-show="!model.containers[0].lyrics.length && model.containers[1].lyrics.length && container.type === 'cutup'"><em>drag lyrics here</em></span>
       <ul dnd-list="container.lyrics">
-            <!-- maybe fix this error some day... -->
-            <li ng-repeat="lyricObject in container.lyrics"
-            dnd-draggable="lyricObject"
-            dnd-effect-allowed="move"
-            dnd-moved="container.lyrics.splice($index, 1)"
-            dnd-selected="model.selected = lyricObject"
-            ng-class="{'selected': model.selected === lyricObject}">
-              {{lyricObject.lyric}}
-            </li>
-        </ul>
+          <!-- maybe fix this error some day... -->
+          <li ng-repeat="lyricObject in container.lyrics"
+          dnd-draggable="lyricObject"
+          dnd-effect-allowed="move"
+          dnd-moved="container.lyrics.splice($index, 1)"
+          dnd-selected="model.selected = lyricObject"
+          ng-class="{'selected z-depth-2': model.selected === lyricObject}"
+          >
+            {{lyricObject.lyric}}
+          </li>
+      </ul>
     </div>
-    </div>
+  </div>
 </div>
 
       <a class="save-button waves-effect waves-light btn-large" ng-click="saveCutup(model.containers[0])">save</a>
