@@ -57,7 +57,7 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
         lyrics: ''
       }
     },
-    trim: function(){
+    trimInit: function(){
       this.trimEditor = true;
       this.splitLyricArray = $scope.model.selected.lyric.split(' ');
       // set available range
@@ -68,18 +68,24 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
       $scope.userMin = $scope.minLen;
       $scope.userMax = $scope.maxLen;
 
+
     },
 
-    hightlight: function(){
-      console.log("hightlight")
-      if(this.lyricArray){
-        this.splitLyricArray.map(function(e){
-          return '<span class="highlighted">'+e+'</span>';
-        });
-        $scope.trimString = this.splitLyricArray.join(separator = ' ')
+    trim: function(min, max){
+
+      this.hightlight(min, max);
+
+    },
+
+    hightlight: function(min, max){
+
+      if(this.splitLyricArray){
+        $scope.trimString =  this.splitLyricArray.slice(min, max).join(" ");
+        $scope.trimStringBefore =  this.splitLyricArray.slice(0, min).join(" ");
+        $scope.trimStringAfter =  this.splitLyricArray.slice(max).join(" ");
       }
     },
-    lyricArray: '',
+    splitLyricArray: '',
     trimEditor: false,
 
   }
