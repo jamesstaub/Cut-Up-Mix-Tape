@@ -23,7 +23,14 @@
           dnd-moved="container.lyrics.splice($index, 1)"
           dnd-selected="model.selected = lyricObject"
           ng-class="{'selected z-depth-2': model.selected === lyricObject}"
+          dnd-type="container.type"
           >
+            <div class="lyric-controls"
+            ng-show="lyricObject === model.selected">
+              <i class="material-icons"
+              ng-click="container.lyrics.splice($index, 1)">delete</i>
+              <i class="material-icons">edit</i>
+            </div>
             {{lyricObject.lyric}}
           </li>
       </ul>

@@ -32,7 +32,7 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
         $scope.model.containers[1] = {
           type: 'results',
           query: this.value,
-          lyrics: data
+          lyrics: data,
         }
       });
     },
@@ -49,13 +49,16 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
     value: ''
   }
 
-  $scope.clearComposition = function(){
-  console.log("clear you fuck")
-   $scope.model.containers[0] = {
-        type: 'results',
+
+  $scope.editComposition = {
+    clearAll: function(){
+      $scope.model.containers[0] = {
+        type: 'cutup',
         query: this.value,
         lyrics: ''
       }
+    }
+
   }
 
   $scope.saveCutup = function(cutup){
