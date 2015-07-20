@@ -4,13 +4,19 @@
 
 <div class='panel'>
   <div class='row'>
-    <div class="img-container">
-      <img src="{{model.selected.artist_img}}" alt="">
-    </div>
-    <div class="col m9 song-info">
+    <div class="col m4 song-info">
       <span class="selected-info"><h4>{{model.selected.title}}</h4></span> <span ng-if="model.selected">by</span>
       <span class="selected-info"><h4>{{model.selected.artist}}</h4></span>
     </div>
+    <div class="img-container col m4">
+
+      <img ng-if="model.selected.artist_img" src="{{model.selected.artist_img}}" alt="{{model.selected.artist}}">
+    </div>
+    <div class="col m4 song-info">
+      <a class="save-button waves-effect waves-light btn-large" ng-click="saveCutup(model.containers[0])">save</a>
+    </div>
+
+
   </div>
 </div>
 
