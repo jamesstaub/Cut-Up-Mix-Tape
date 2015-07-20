@@ -22,9 +22,13 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
       return this.value;
     },
     queryGenius: function(){
-      console.log('query' + this.value)
+      $scope.model.containers[1] = {
+          type: 'loading',
+          query: '',
+          lyrics: ''
+        }
+
       GeniusApi.get(this.value).success(function(data) {
-        console.log(data);
         $scope.model.containers[1] = {
           type: 'results',
           query: this.value,

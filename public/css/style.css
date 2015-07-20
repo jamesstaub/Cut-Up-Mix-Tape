@@ -54,6 +54,11 @@ input {
   width: auto;
   height: 180px;
 }
+.loading {
+  margin: 0 auto;
+  display: block;
+  width: 65px;
+}
 .save-button {
   float: right;
   margin-right: 20px;

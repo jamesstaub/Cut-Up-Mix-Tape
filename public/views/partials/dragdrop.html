@@ -1,15 +1,14 @@
 <div class="row cutup-editor">
   <div class ="col m6  cutup-list col-{{container.type}}" ng-repeat="container in model.containers track by $index">
 
-  <div ng-if="container === model.containers[1]" >
-    <!-- <input type="text" name="q" ng-model="query" ng-change="queryGenius(query)" placeholder="enter a message"> -->
-  </div>
 
-  <div ng-if="container === model.containers[0]" >
-    <!-- <input type="text" ng-model="model.containers[0].title" placeholder="enter a title"/> -->
-  </div>
-  <!-- <h3>{{container.title || container.query}}</h3> -->
+
     <div class="lists">
+
+      <div ng-show="container.type === 'loading'" >
+        <div class="loading" ng-include src="'views/partials/loading.html'"></div>
+      </div>
+
     <h4 ng-show="!model.containers[0].lyrics.length && model.containers[1].lyrics.length && container.type === 'cutup'"><em>drag lyrics here</em></h4>
       <ul dnd-list="container.lyrics">
             <!-- maybe fix this error some day... -->
