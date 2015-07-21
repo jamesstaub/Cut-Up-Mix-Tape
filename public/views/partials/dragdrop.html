@@ -33,7 +33,7 @@
               ng-click="editComposition.trimInit()">edit</i>
             </div>
             {{lyricObject.lyric}}
-            <div class="trim-interface" ng-show="lyricObject === model.selected" ng-include src="'views/partials/trimmer.html'"></div>
+            <div class="trim-interface" ng-show="editComposition.trimEditor &&lyricObject === model.selected" ng-include src="'views/partials/trimmer.html'"></div>
           </li>
       </ul>
     </div>

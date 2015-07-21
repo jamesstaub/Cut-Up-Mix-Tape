@@ -31,7 +31,6 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
           query: '',
           lyrics: ''
         }
-
       GeniusApi.get(this.value).success(function(data) {
         $scope.model.containers[1] = {
           type: 'results',
@@ -62,9 +61,6 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
         lyrics: ''
       }
     },
-    trimClear: function(){
-      this.trimEditor = false;
-    },
     trimInit: function(){
       this.trimEditor = true;
       this.splitLyricArray = $scope.model.selected.lyric.split(' ');
@@ -75,19 +71,26 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
       // default the user's values to the available range
       $scope.userMin = $scope.minLen;
       $scope.userMax = $scope.maxLen;
+      this.trim(0, this.splitLyricArray.length);
     },
 
     trim: function(min, max){
       // the event binding on the range slider directive is crap, hence this feature is crap
-      this.hightlight(min, max);
-
-    },
-    hightlight: function(min, max){
       if(this.splitLyricArray){
         $scope.trimString =  this.splitLyricArray.slice(min, max).join(" ");
         $scope.trimStringBefore = this.splitLyricArray.slice(0, min).join(" ");
         $scope.trimStringAfter = this.splitLyricArray.slice(max).join(" ");
       }
+    },
+    trimClear: function(){
+      this.trimEditor = false;
+    },
+    trimSave: function(lyricObject){
+      lyricObject.lyric = $scope.trimString;
+      this.trimClear();
+    },
+    hightlight: function(min, max){
+
     },
     splitLyricArray: '',
     trimEditor: false,
