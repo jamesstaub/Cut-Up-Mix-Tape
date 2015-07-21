@@ -6,6 +6,7 @@ app.config(['$httpProvider',
      $httpProvider.defaults.withCredentials = true;
    }
  ])
+
 //search form Directive to query api
 // app.directive('query', function() {
 //   return {

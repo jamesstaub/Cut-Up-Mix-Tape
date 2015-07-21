@@ -29,7 +29,6 @@ input
 .lists
   position relative
   span
-    position absolute
     top -20px;
 
 .cutup-list
@@ -103,10 +102,25 @@ input
 }
 
 
-.lyric-controls
-  padding 5px 10px
+.lyric-controls, .trim-controls
+  padding-left 10px
   float right
 
 .highlighted
   background-color yellow
+
+
+.cutup-list ul li
+  // relative
+
+.trim-interface
+  background-color #333
+  color #f00
+  position absolute
+  width 100%
+  left 0
+  top 0
+  padding 5px
+  // position relative
+
 

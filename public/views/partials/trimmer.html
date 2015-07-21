@@ -1,15 +1,20 @@
 <div ng-show="editComposition.trimEditor">
-  <p> <span>{{trimStringBefore}}</span> <span class="highlighted"
-  >{{trimString}}</span> <span>{{trimStringAfter}}</span></p>
-  <div class="trim-slider"
-      range-slider
+  <span>{{trimStringBefore}}</span> <span class="highlighted"
+  >{{trimString}}</span> <span>{{trimStringAfter}}</span>
+  <div class="trim-controls">
+    <i class="material-icons" ng-click="">done</i>
+    <i class="material-icons" ng-click="editComposition.trimClear()">cancel</i>
+  </div>
+  <div range-slider
       min="0"
       max="maxLen"
       model-min="userMin"
       model-max="userMax"
       on-handle-up="editComposition.trim(userMin, userMax)"
       on-handle-down="editComposition.trim(userMin, userMax)"
+      getterSetter="true"
+      class="trim-slider"
   ></div>
-
 </div>
+
 
