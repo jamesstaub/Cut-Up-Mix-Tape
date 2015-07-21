@@ -21,7 +21,7 @@
           dnd-draggable="lyricObject"
           dnd-effect-allowed="move"
           dnd-moved="container.lyrics.splice($index, 1)"
-          dnd-selected="model.selected = lyricObject"
+          dnd-selected="editComposition.select(lyricObject)"
           ng-class="{'selected z-depth-2': model.selected === lyricObject}"
           dnd-type="container.type"
           >

@@ -1,6 +1,5 @@
 angular.module('cutupApp').controller('CutUpController', function($scope, $routeParams, CutUp) {
 
-
   $scope.getCutupsList = function(){
     CutUp.get().success(function(response){
       $scope.cutups = response;

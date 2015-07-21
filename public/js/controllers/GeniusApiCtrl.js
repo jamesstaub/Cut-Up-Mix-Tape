@@ -7,11 +7,6 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
           type: 'cutup',
           title: 'enter a title',
           lyrics: []
-        },
-        {
-          type: 'cutup',
-          title: 'enter a title',
-          lyrics: [{lyric: "one two three four five six seven"}]
         }
       ],
       selected: null
@@ -54,6 +49,15 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
 
 // for editing and deleting individual lyric segments
   $scope.editComposition = {
+
+    select: function(lyricObject){
+      // prevent the editor from persisting when selecting a new lyric
+      if(lyricObject !== $scope.model.selected){
+        this.trimEditor = false;
+        $scope.model.selected = lyricObject;
+      }
+
+    },
     clearAll: function(){
       $scope.model.containers[0] = {
         type: 'cutup',

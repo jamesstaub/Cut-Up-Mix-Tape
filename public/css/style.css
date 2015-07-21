@@ -109,4 +109,5 @@ input {
   left: 0;
   top: 0;
   padding: 5px;
+  z-index: 100;
 }
