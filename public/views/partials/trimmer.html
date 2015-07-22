@@ -1,7 +1,7 @@
 <div>
-
+<small>select a region of text to trim</small>
   <div class="trim-controls">
-    <i class="material-icons" ng-click="lyricObject.lyric = selectedText">done</i>
+    <i class="material-icons" ng-class="{'active': isSelected}" ng-click="lyricObject.lyric = selectedText">done</i>
     <i class="material-icons" ng-click="editComposition.trimClear()">cancel</i>
   </div>
 

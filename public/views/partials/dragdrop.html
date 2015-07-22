@@ -1,13 +1,8 @@
 <div class="row cutup-editor" ng-click="editComposition.trimClear()">
 
-  <div class="row">
-    <div class="col m6">
-          <div class="input-field" ng-include src="'views/partials/input.html'"></div>
-    </div>
-    <div class="col m6">
-      <!-- title -->
-    </div>
-  </div>
+
+  <div class="input-field" ng-include src="'views/partials/input.html'"></div>
+
   <div class ="col m6  cutup-list col-{{container.type}}" ng-repeat="container in model.containers track by $index">
     <div class="lists">
       <div ng-show="container.type === 'loading'" >
@@ -35,7 +30,7 @@
               <i class="material-icons"
               ng-click="editComposition.trimInit(lyricObject.lyric)">edit</i>
             </div>
-            <div class="trim-interface" ng-show="editComposition.trimEditor &&lyricObject === model.selected" ng-include src="'views/partials/trimmer.html'"></div>
+            <div class="trim-interface z-depth-3" ng-show="editComposition.trimEditor &&lyricObject === model.selected" ng-include src="'views/partials/trimmer.html'"></div>
             {{lyricObject.lyric}}
           </li>
       </ul>

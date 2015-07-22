@@ -31,7 +31,6 @@ var searchGeniusPromise = function(searchQuery, transformer) {
   })
 }
 
-
 // transformer functions to filter the results of the genius search request
 // not used but this could list title and artist of the search results
 function listResults(results){
@@ -114,8 +113,6 @@ function filterLyrics(searchQuery, songsArray){
   return songsArray.map(function(song){
     // queryInResult()
     // console.log(song);
-    console.log("-----------")
-    console.log(song)
     var filteredSong = {
           title: song.title,
           artist: song.artist,

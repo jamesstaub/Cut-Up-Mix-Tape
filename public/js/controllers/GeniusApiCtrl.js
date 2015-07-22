@@ -17,6 +17,9 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
     set: function(msg){
       this.value = msg;
     },
+    setTitle: function(title){
+      $scope.model.containers[0].title = title;
+    },
     get: function(){
       return this.value;
     },
@@ -66,10 +69,9 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
       }
     },
     trimInit: function(lyric){
-
+      $scope.isSelected = false;
       this.trimEditor = true;
       $scope.lyricToTrim = lyric;
-      console.log($scope.lyricToTrim)
     },
 
     trim: function(){
@@ -78,7 +80,7 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
     trimClear: function(){
       this.trimEditor = false;
     },
-    trimSave: function(lyricObject){
+    trimSave: function(selectedText){
       // lyricObject.lyric = $scope.lyricToTrim;
       this.trimClear();
     },
@@ -92,11 +94,16 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
   };
 
   $scope.getSelectionText = function() {
+     $scope.isSelected = false;
     var text = "";
     if (window.getSelection) {
       text = window.getSelection().toString();
     } else if (document.selection && document.selection.type != "Control") {
       text = document.selection.createRange().text;
+    }
+
+    if(text.length > 0 ){
+      $scope.isSelected = true;
     }
     return text;
   };
