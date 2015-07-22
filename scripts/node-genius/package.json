@@ -1,0 +1,52 @@
+{
+  "name": "node-genius",
+  "version": "1.0.3",
+  "description": "Node client for the Genius API",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexbooker/node-genius"
+  },
+  "bugs": {
+    "url": "https://github.com/alexbooker/node-genius/issues"
+  },
+  "keywords": [
+    "Genius"
+  ],
+  "author": {
+    "name": "Alex Booker",
+    "email": "alexbooker@fastmail.im"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.11.0",
+    "jshint-stylish": "^2.0.0",
+    "express": "^4.12.4"
+  },
+  "dependencies": {
+    "request": "^2.57.0"
+  },
+  "gitHead": "dbf757677970844824dca37fa5de5f58bcb7bd8e",
+  "_id": "node-genius@1.0.3",
+  "scripts": {},
+  "_shasum": "7855f7b53acad0f0de22501e751cf6d5f654ecc6",
+  "_from": "node-genius@*",
+  "_npmVersion": "1.4.21",
+  "_npmUser": {
+    "name": "alexbooker",
+    "email": "alexbooker@fastmail.im"
+  },
+  "maintainers": [
+    {
+      "name": "alexbooker",
+      "email": "alexbooker@fastmail.im"
+    }
+  ],
+  "dist": {
+    "shasum": "7855f7b53acad0f0de22501e751cf6d5f654ecc6",
+    "tarball": "http://registry.npmjs.org/node-genius/-/node-genius-1.0.3.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/node-genius/-/node-genius-1.0.3.tgz"
+}
