@@ -1,5 +1,9 @@
 # CutUp Mix Tape
-write a message with song lyrics
+
+
+write a message with song lyrics.
+
+[view this project](https://stark-journey-3066.herokuapp.com/)
 
 
 ##concept and goals
