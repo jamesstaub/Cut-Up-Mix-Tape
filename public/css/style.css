@@ -106,8 +106,14 @@ input {
   color: #f00;
   position: absolute;
   width: 100%;
+  height: 100%;
   left: 0;
   top: 0;
   padding: 5px;
   z-index: 100;
+}
+.trim-selector {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  user-select: text;
 }

@@ -1,4 +1,4 @@
-var app = angular.module('cutupApp', ['ngRoute', 'appRoutes', 'dndLists', 'ui-rangeSlider']);
+var app = angular.module('cutupApp', ['ngRoute', 'appRoutes', 'dndLists']);
 
 
 app.config(['$httpProvider',

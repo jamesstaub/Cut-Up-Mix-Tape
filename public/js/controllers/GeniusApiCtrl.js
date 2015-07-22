@@ -65,40 +65,41 @@ angular.module('cutupApp').controller('GeniusApiController', ['$scope', '$locati
         lyrics: ''
       }
     },
-    trimInit: function(){
-      this.trimEditor = true;
-      this.splitLyricArray = $scope.model.selected.lyric.split(' ');
-      // set available range
-      $scope.minLen = 0;
-      $scope.maxLen = this.splitLyricArray.length;
+    trimInit: function(lyric){
 
-      // default the user's values to the available range
-      $scope.userMin = $scope.minLen;
-      $scope.userMax = $scope.maxLen;
-      this.trim(0, this.splitLyricArray.length);
+      this.trimEditor = true;
+      $scope.lyricToTrim = lyric;
+      console.log($scope.lyricToTrim)
     },
 
-    trim: function(min, max){
-      // the event binding on the range slider directive is crap, hence this feature is crap
-      if(this.splitLyricArray){
-        $scope.trimString =  this.splitLyricArray.slice(min, max).join(" ");
-        $scope.trimStringBefore = this.splitLyricArray.slice(0, min).join(" ");
-        $scope.trimStringAfter = this.splitLyricArray.slice(max).join(" ");
-      }
+    trim: function(){
+
     },
     trimClear: function(){
       this.trimEditor = false;
     },
     trimSave: function(lyricObject){
-      lyricObject.lyric = $scope.trimString;
+      // lyricObject.lyric = $scope.lyricToTrim;
       this.trimClear();
     },
-    hightlight: function(min, max){
 
-    },
     splitLyricArray: '',
     trimEditor: false,
   }
+
+  $scope.showSelectedText = function() {
+    $scope.selectedText =  $scope.getSelectionText();
+  };
+
+  $scope.getSelectionText = function() {
+    var text = "";
+    if (window.getSelection) {
+      text = window.getSelection().toString();
+    } else if (document.selection && document.selection.type != "Control") {
+      text = document.selection.createRange().text;
+    }
+    return text;
+  };
 
   $scope.saveCutup = function(cutup){
     GeniusApi.post(cutup).success(function(response){

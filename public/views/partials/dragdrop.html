@@ -16,7 +16,9 @@
 
       <span ng-show="!model.containers[0].lyrics.length && model.containers[1].lyrics.length && container.type === 'cutup'"><em>drag lyrics here</em></span>
       <ul dnd-list="container.lyrics">
-          <!-- maybe fix this error some day... -->
+        <!-- <li class="trim-selector" ng-mouseup="showSelectedText()">
+            >>{{lyricToTrim}}
+        </li> -->
           <li ng-repeat="lyricObject in container.lyrics"
           dnd-draggable="lyricObject"
           dnd-effect-allowed="move"
@@ -24,19 +26,21 @@
           dnd-selected="editComposition.select(lyricObject)"
           ng-class="{'selected z-depth-2': model.selected === lyricObject}"
           dnd-type="container.type"
+          dnd-disable-if="lyricObject === model.selected && editComposition.trimEditor"
           >
             <div class="lyric-controls"
             ng-show="lyricObject === model.selected">
               <i class="material-icons"
               ng-click="container.lyrics.splice($index, 1)">delete</i>
               <i class="material-icons"
-              ng-click="editComposition.trimInit()">edit</i>
+              ng-click="editComposition.trimInit(lyricObject.lyric)">edit</i>
             </div>
-            {{lyricObject.lyric}}
             <div class="trim-interface" ng-show="editComposition.trimEditor &&lyricObject === model.selected" ng-include src="'views/partials/trimmer.html'"></div>
+            {{lyricObject.lyric}}
           </li>
       </ul>
     </div>
   </div>
 </div>
+
 
